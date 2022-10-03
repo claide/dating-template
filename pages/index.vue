@@ -1,9 +1,15 @@
 <template>
-  <Tutorial />
+  <div>
+    <h1>Hello</h1>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage'
+  layout: 'default',
+
+  middleware: 'guest',
+
+  auth: 'guest'
 }
 </script>

@@ -40,7 +40,45 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
+
+  axios: {
+    baseURL: process.env.API_URL || 'https://dating-api.muzio.dev/api'
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/login',
+            method: 'post',
+            propertyName: 'data.access_token'
+          },
+          user: {
+            url: '/me',
+            method: 'post',
+            propertyName: false
+          },
+          logout: {
+            url: '/logout',
+            method: 'post'
+          },
+          tokenRequired: true,
+          tokenType: 'Bearer'
+        }
+      }
+    },
+    refreshJWT: {
+      endpoint: {
+        url: '/refresh',
+        method: 'post'
+      },
+      interval: 10 // minutes
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
