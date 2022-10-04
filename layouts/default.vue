@@ -4,9 +4,9 @@
     <div v-if="$nuxt.isOffline" class="text-center bg-red-600 text-white">
       Oops! Looks like you're offline.
     </div>
-    <BaseNavbarElement />
-    <Nuxt />
-    <BaseFooter />
+    <BaseAppNavbar />
+    <Nuxt class="min-h-[calc(100vh-200px)]" />
+    <BaseAppFooter />
   </div>
 </template>
 

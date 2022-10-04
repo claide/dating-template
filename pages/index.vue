@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Hello</h1>
+    <GuestAppHero />
   </div>
 </template>
 
@@ -10,6 +10,22 @@ export default {
 
   middleware: 'guest',
 
-  auth: 'guest'
+  head () {
+    return {
+      title: 'Home',
+      htmlAttrs: {
+        class: this.checkLandingPage()
+      }
+    }
+  },
+
+  methods: {
+    checkLandingPage () {
+      return +this.$store.state.campaign.landing === 3 ||
+        (+this.$store.state.campaign.landing === 4 && this.start === false)
+        ? 'survey-start ' + this.$colorMode.preference
+        : this.$colorMode.preference
+    }
+  }
 }
 </script>
