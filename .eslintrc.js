@@ -17,6 +17,7 @@ module.exports = {
     'vue/html-indent': ['error', 2],
     'vue/singleline-html-element-content-newline': 0,
     'vue/component-name-in-template-casing': ['error', 'PascalCase'],
+    'import/no-named-as-default': 0,
     'vue/valid-v-slot': [
       'error',
       {
