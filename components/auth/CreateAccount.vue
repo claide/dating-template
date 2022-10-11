@@ -26,7 +26,7 @@
       <div class="flex-grow border-t border-slate-400"></div>
     </div>
 
-    <form>
+    <form class="relative">
       <div class="mb-4">
         <label for="gender" class="block mb-2 font-medium text-gray-900 text-sm">I am</label>
         <BaseAppDropdown v-model="profile.preferences">
@@ -41,19 +41,61 @@
       </div>
 
       <div class="mb-4">
-        <label for="location" class="block mb-2 font-medium text-gray-900 text-sm">Live in</label>
+        <label for="location" class="block mb-2 font-medium text-gray-900 text-sm">Lives in</label>
         <VueAutosuggest
+          ref="autosuggest"
           v-model="profile.lives_in"
-          :suggestions="cities"
+          :suggestions="filteredSuggestions"
           :input-props="inputProps"
+          :get-suggestion-value="(s) => s.item.name"
+          :render-suggestion="renderSuggestion"
           @input="getCities"
           @selected="onCitySelect"
-        >
-          <template slot-scope="{ suggestion }">
-            <span class="my-suggestion-item">{{ suggestion.item }}</span>
-          </template>
-        </VueAutosuggest>
+        />
       </div>
+
+      <div class="mb-4">
+        <label for="gender" class="block mb-2 font-medium text-gray-900 text-sm">Your preference</label>
+        <BaseAppDropdown v-model="profile.choice">
+          <template #trigger>
+            {{ preferenceTriggerText }}
+          </template>
+          <BaseAppDropdownItem v-for="(item, i) in preferencesList" :key="i" :value="item">{{
+            item
+          }}</BaseAppDropdownItem>
+        </BaseAppDropdown>
+      </div>
+
+      <div class="mb-4">
+        <BaseAppInput v-model="profile.email" type="email" label="E-mail" />
+      </div>
+
+      <BaseAppButton
+        :disabled="submitting"
+        :class="{ submitting: 'cursor-not-allowed' }"
+        type="submit"
+        color="red"
+        size="lg"
+        class="text-white"
+        expanded
+        @click.prevent="submit"
+      >
+        <svg
+          v-if="submitting"
+          class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+        {{ $route.name === 'milf' ? 'Find Members Nearby' : 'Create Account' }}
+      </BaseAppButton>
     </form>
   </div>
 </template>
@@ -75,17 +117,29 @@ export default {
       profile: new User({
         preferences: 'm_f',
         lives_in: '',
+        lat: '',
+        lng: '',
+        choice: null,
+        email: '',
       }),
       cities: [],
+      submitting: false,
+      selectedLocation: null,
       inputProps: {
-        'v-validate': 'required',
         name: 'lives_in',
-        'data-vv-as': 'lives in',
         field: 'name',
         placeholder: 'Search City',
         class:
-          'bg-slate-100 focus:bg-white border border-slate-100 text-gray-900 text-sm rounded focus:ring-yellow-400 focus:border-yellow-400 block w-full p-2.5 outline-none',
+          'rounded-md border border-slate-300 bg-slate-100 py-2.5 pl-3 pr-10 text-left shadow-sm focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 sm:text-sm w-full',
       },
+      preferencesList: [
+        'Sex contact',
+        'Exploring erotic/sexual fantasies',
+        'Secret affairs',
+        'Friends with benefits',
+        'Love/companionship',
+        'Long-term relationship',
+      ],
     }
   },
 
@@ -96,9 +150,25 @@ export default {
       if (this.profile.preferences === 'f_f') return 'a woman looking for a woman'
       return 'a man looking for a woman'
     },
-    _cities() {
-      return this.$store.state.provinces.cities
+
+    preferenceTriggerText() {
+      if (this.profile.choice === null) {
+        return 'Select preference'
+      }
+
+      return this.profile.choice
     },
+
+    filteredSuggestions() {
+      return [
+        {
+          data: this.cities.filter((item) => {
+            return item.name.toLowerCase().includes(this.profile.lives_in.toLowerCase())
+          }),
+        },
+      ]
+    },
+
     googleLink() {
       let url = `https://api.wannahookup.com/api/login/google?s1=${this.$store.state.campaign.s1}`
       url += `&s2=${this.$store.state.campaign.s2}`
@@ -110,6 +180,7 @@ export default {
 
       return url
     },
+
     registeredUsersCount() {
       const diffInDays = dayjs().diff(dayjs('2020-05-18'), 'day')
       return (180000 + diffInDays * 365).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
@@ -121,33 +192,132 @@ export default {
   },
 
   methods: {
+    async submit() {
+      if (!(await this.$validator.validate())) {
+        return false
+      }
+      this.submitting = true
+      try {
+        const { uuid } = await this.profile.register()
+        await this.uploadImage(uuid)
+        this.$router.push({
+          path: '/confirm-email',
+          query: {
+            uuid,
+            email: this.profile.email,
+          },
+        })
+      } catch (e) {
+        this.$setErrorsFromResponse(e.response.data)
+      }
+      this.submitting = false
+    },
+
     getCities: debounce(async function (name = '') {
-      if (!name.trim()) return
-      this.isFetchingCity = true
-      this.cities = (await City.where('nameStarts', name).where('province', this.profile.state).get()).data
-      this.isFetchingCity = false
+      // this.isFetchingCity = true
+      this.cities = (await City.where('nameStarts', name).get()).data
+      // this.isFetchingCity = false
     }, 500),
 
     onCitySelect(city) {
+      // eslint-disable-next-line no-console
+      console.log('city', city)
       if (city) {
-        this.profile.lives_in = city.name
-        this.profile.lat = city.lat
-        this.profile.lng = city.lng
-        this.profile.lives_in_display = this.$options.filters.cityName(city.name)
-        this.$nextTick(() => {
-          this.$validator._base.validate('lives_in')
-        })
+        this.profile.lives_in = city.item.name
+        this.profile.lat = city.item.lat
+        this.profile.lng = city.item.lng
+        this.profile.lives_in_display = this.$options.filters.cityName(city.item.name)
+        // this.$nextTick(() => {
+        //   this.$validator._base.validate('lives_in')
+        // })
       }
     },
 
     geolocation() {
-      this.$axios.$get('/location').then((res) => {
-        this.profile.lat = res.data.lat
-        this.profile.lng = res.data.lon
-        this.profile.lives_in = res.data.city
-        this.profile.lives_in_display = this.$options.filters.cityName(res.data.city)
-      })
+      let headers = {}
+      try {
+        if (!sessionStorage.getItem('landerPinged')) {
+          headers = {
+            'lander-origin': window.location.pathname || '/',
+            s1: this.$route.query.s1 || '',
+            s2: this.$route.query.s2 || '',
+            s3: this.$route.query.s3 || '',
+            s4: this.$route.query.s4 || '',
+            s5: this.$route.query.s5 || '',
+          }
+          sessionStorage.setItem('landerPinged', 1)
+        }
+      } catch (e) {}
+      this.$axios
+        .$get('/location', {
+          headers,
+        })
+        .then((res) => {
+          this.profile.lat = res.data.lat
+          this.profile.lng = res.data.lon
+          this.profile.lives_in = res.data.city
+        })
+    },
+
+    renderSuggestion(suggestion) {
+      return this.$createElement('div', suggestion.item.name)
     },
   },
 }
 </script>
+
+<style lang="scss">
+.autosuggest__results-container {
+  position: relative;
+  width: 100%;
+}
+
+.autosuggest__results {
+  font-weight: 300;
+  margin: 0;
+  position: absolute;
+  z-index: 10000001;
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background: white;
+  padding: 0px;
+}
+
+.autosuggest__results ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.autosuggest__results .autosuggest__results-item {
+  cursor: pointer;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 2.25rem;
+}
+
+#autosuggest ul:nth-child(1) > .autosuggest__results_title {
+  border-top: none;
+}
+
+.autosuggest__results .autosuggest__results_title {
+  color: gray;
+  font-size: 11px;
+  margin-left: 0;
+  padding: 15px 13px 5px;
+  border-top: 1px solid lightgray;
+}
+
+.autosuggest__results .autosuggest__results-item:active,
+.autosuggest__results .autosuggest__results-item:hover,
+.autosuggest__results .autosuggest__results-item:focus,
+.autosuggest__results .autosuggest__results-item.autosuggest__results-item--highlighted {
+  background-color: #5046e3;
+  color: #fff;
+}
+</style>
