@@ -7,7 +7,7 @@
         </nuxt-link>
         <div>
           <span class="text-lg md:text-xl text-white mb-3 block"
-          >ShagToday</span
+            >ShagToday</span
           >
           <ul class="leading-loose">
             <li>
@@ -52,8 +52,8 @@
           <span class="text-lg md:text-xl text-white mb-3 block">About Us</span>
           <ul class="leading-loose">
             <li>
-              <nuxt-link to="/prices" class="hover:text-primary">
-                Prices
+              <nuxt-link to="/pricing" class="hover:text-primary">
+                Pricing
               </nuxt-link>
             </li>
             <li>
@@ -126,7 +126,7 @@
             All members and persons appearing on this site are over 18 years of
             age.
             <a href="#" class="text-white"
-            >18 U.S.C. 2257 Record Keeping Requirements Compliance
+              >18 U.S.C. 2257 Record Keeping Requirements Compliance
               Statement</a
             >
           </li>
