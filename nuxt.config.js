@@ -29,6 +29,7 @@ export default {
     '@plugins/filters',
     '@plugins/axios',
     '@plugins/validator',
+    '@plugins/i18n',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -50,7 +51,7 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/auth','@nuxtjs/axios'],
+  modules: ['@nuxtjs/auth', '@nuxtjs/axios'],
 
   axios: {
     baseURL: process.env.API_URL || 'https://dating-api.muzio.dev/api',

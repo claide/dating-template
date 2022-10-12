@@ -26,6 +26,7 @@
     "vue": "^2.7.10",
     "vue-api-query": "^1.10.0",
     "vue-autosuggest": "^2.2.0",
+    "vue-i18n": "8",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10"
   },

@@ -90,6 +90,28 @@
           <label
             for="gender"
             class="block mb-2 font-medium text-gray-900 text-sm"
+            >Age</label
+          >
+          <ValidationProvider v-slot="{ errors }" rules="required" name="Age">
+            <BaseAppDropdown v-model="profile.age">
+              <template #trigger>
+                {{ profile.age }}
+              </template>
+              <BaseAppDropdownItem v-for="n in 53" :key="n + 17" :value="n + 17"
+                ><span v-if="n + 17 === 70">{{ n + 17 }}+</span>
+                <span v-else>{{ n + 17 }}</span></BaseAppDropdownItem
+              >
+            </BaseAppDropdown>
+            <span v-if="errors" class="mt-1 block text-sm text-red-500">{{
+              errors[0]
+            }}</span>
+          </ValidationProvider>
+        </div>
+
+        <div class="mb-4">
+          <label
+            for="gender"
+            class="block mb-2 font-medium text-gray-900 text-sm"
             >Your preference</label
           >
           <ValidationProvider
@@ -134,7 +156,7 @@
           type="submit"
           color="red"
           size="lg"
-          class="text-white"
+          class="text-white mt-6 block"
           expanded
           @click.prevent="onSubmit"
         >
@@ -205,6 +227,7 @@ export default {
         username: '',
         looking_for: 'female',
         gender: 'male',
+        age: 20,
       }),
       cities: [],
       submitting: false,
@@ -284,15 +307,10 @@ export default {
   methods: {
     async onSubmit() {
       // check if form is valid
-      this.$refs.form.validate().then((success) => {
-        if (!success) return
+      if (!this.$refs.form.validate()) {
+        return false
+      }
 
-        // if valid submit
-        this.submit()
-      })
-    },
-
-    async submit() {
       this.submitting = true
       try {
         const { uuid } = await this.profile.register()
@@ -305,7 +323,7 @@ export default {
           },
         })
       } catch (e) {
-        this.$setErrorsFromResponse(e.response.data)
+        console.log('e', e)
       }
       this.submitting = false
     },
