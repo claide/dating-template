@@ -50,7 +50,7 @@ export default {
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/axios', '@nuxtjs/auth-next'],
+  modules: ['@nuxtjs/auth','@nuxtjs/axios'],
 
   axios: {
     baseURL: process.env.API_URL || 'https://dating-api.muzio.dev/api',
@@ -59,15 +59,6 @@ export default {
   auth: {
     strategies: {
       local: {
-        token: {
-          property: 'access_token',
-          type: 'Bearer',
-        },
-        user: {
-          property: 'user',
-        },
-        tokenRequired: true,
-        tokenType: 'Bearer',
         endpoints: {
           login: {
             url: '/login',
