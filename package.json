@@ -1,6 +1,6 @@
 {
   "name": "dating-template",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",
@@ -19,6 +19,7 @@
     "core-js": "^3.25.3",
     "dayjs": "^1.11.5",
     "dotenv": "^16.0.3",
+    "eslint-plugin-no-empty-blocks": "^0.0.2",
     "lodash": "^4.17.21",
     "nuxt": "^2.15.8",
     "vee-validate": "<3.0.0",

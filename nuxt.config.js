@@ -58,6 +58,15 @@ export default {
   auth: {
     strategies: {
       local: {
+        token: {
+          property: 'access_token',
+          type: 'Bearer',
+        },
+        user: {
+          property: 'user',
+        },
+        tokenRequired: true,
+        tokenType: 'Bearer',
         endpoints: {
           login: {
             url: '/login',
@@ -73,8 +82,11 @@ export default {
             url: '/logout',
             method: 'post',
           },
-          tokenRequired: true,
-          tokenType: 'Bearer',
+        },
+        redirect: {
+          login: '/login',
+          logout: '/',
+          home: '/dashboard',
         },
       },
     },

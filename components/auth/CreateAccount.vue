@@ -21,7 +21,7 @@
         <IconGoogle class="h-[18px] w-[18px] mt-[11px] ml-[11px]" />
       </div>
       <span class="text-center mx-auto text-gray-600 font-medium"
-      >Log in with Google</span
+        >Log in with Google</span
       >
     </a>
     <!-- End login with Google -->
@@ -32,108 +32,139 @@
       <div class="flex-grow border-t border-slate-400"></div>
     </div>
 
-    <form class="relative">
-      <div class="mb-4">
-        <label for="gender" class="block mb-2 font-medium text-gray-900 text-sm"
-        >I am</label
-        >
-        <BaseAppDropdown v-model="profile.preferences">
-          <template #trigger>
-            {{ genderTriggerText }}
-          </template>
-          <BaseAppDropdownItem value="m_f"
-          >a man looking for a woman</BaseAppDropdownItem
+    <ValidationObserver ref="form">
+      <form class="relative">
+        <div class="mb-4">
+          <label
+            for="gender"
+            class="block mb-2 font-medium text-gray-900 text-sm"
+            >I am</label
           >
-          <BaseAppDropdownItem value="m_m"
-          >a man looking for a man</BaseAppDropdownItem
-          >
-          <BaseAppDropdownItem value="f_m"
-          >a woman looking for a man</BaseAppDropdownItem
-          >
-          <BaseAppDropdownItem value="f_f"
-          >a woman looking for a woman</BaseAppDropdownItem
-          >
-        </BaseAppDropdown>
-      </div>
+          <BaseAppDropdown v-model="profile.preferences" @input="setGender">
+            <template #trigger>
+              {{ genderTriggerText }}
+            </template>
+            <BaseAppDropdownItem value="m_f"
+              >a man looking for a woman</BaseAppDropdownItem
+            >
+            <BaseAppDropdownItem value="m_m"
+              >a man looking for a man</BaseAppDropdownItem
+            >
+            <BaseAppDropdownItem value="f_m"
+              >a woman looking for a man</BaseAppDropdownItem
+            >
+            <BaseAppDropdownItem value="f_f"
+              >a woman looking for a woman</BaseAppDropdownItem
+            >
+          </BaseAppDropdown>
+        </div>
 
-      <div class="mb-4">
-        <label
-          for="location"
-          class="block mb-2 font-medium text-gray-900 text-sm"
-        >Lives in</label
-        >
-        <VueAutosuggest
-          ref="autosuggest"
-          v-model="profile.lives_in"
-          :suggestions="filteredSuggestions"
-          :input-props="inputProps"
-          :get-suggestion-value="(s) => s.item.name"
-          :render-suggestion="renderSuggestion"
-          @input="getCities"
-          @selected="onCitySelect"
-        />
-      </div>
-
-      <div class="mb-4">
-        <label for="gender" class="block mb-2 font-medium text-gray-900 text-sm"
-        >Your preference</label
-        >
-        <BaseAppDropdown v-model="profile.choice">
-          <template #trigger>
-            {{ preferenceTriggerText }}
-          </template>
-          <BaseAppDropdownItem
-            v-for="(item, i) in preferencesList"
-            :key="i"
-            :value="item"
-          >{{ item }}</BaseAppDropdownItem
+        <div class="mb-4">
+          <label
+            for="location"
+            class="block mb-2 font-medium text-gray-900 text-sm"
+            >Lives in</label
           >
-        </BaseAppDropdown>
-      </div>
+          <ValidationProvider
+            v-slot="{ errors }"
+            name="Location"
+            rules="required"
+          >
+            <VueAutosuggest
+              ref="autosuggest"
+              v-model="profile.lives_in"
+              :suggestions="filteredSuggestions"
+              :input-props="inputProps"
+              :get-suggestion-value="(s) => s.item.name"
+              :render-suggestion="renderSuggestion"
+              @input="getCities"
+              @selected="onCitySelect"
+            />
+            <span v-if="errors" class="mt-1 block text-sm text-red-500">{{
+              errors[0]
+            }}</span>
+          </ValidationProvider>
+        </div>
 
-      <div class="mb-4">
-        <BaseAppInput
-          v-model="profile.email"
-          type="email"
-          label="E-mail"
-          placeholder="Type in e-mail"
-        />
-      </div>
+        <div class="mb-4">
+          <label
+            for="gender"
+            class="block mb-2 font-medium text-gray-900 text-sm"
+            >Your preference</label
+          >
+          <ValidationProvider
+            v-slot="{ errors }"
+            rules="required"
+            name="Preference"
+          >
+            <BaseAppDropdown v-model="profile.choice">
+              <template #trigger>
+                {{ preferenceTriggerText }}
+              </template>
+              <BaseAppDropdownItem
+                v-for="(item, i) in preferencesList"
+                :key="i"
+                :value="item"
+                >{{ item }}</BaseAppDropdownItem
+              >
+            </BaseAppDropdown>
+            <span v-if="errors" class="mt-1 block text-sm text-red-500">{{
+              errors[0]
+            }}</span>
+          </ValidationProvider>
+        </div>
 
-      <BaseAppButton
-        :disabled="submitting"
-        :class="{ submitting: 'cursor-not-allowed' }"
-        type="submit"
-        color="red"
-        size="lg"
-        class="text-white"
-        expanded
-        @click.prevent="submit"
-      >
-        <svg
-          v-if="submitting"
-          class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
+        <div class="mb-4">
+          <InputValidation
+            v-slot="{ errors }"
+            v-model="profile.email"
+            name="E-mail"
+            rules="required|email"
+            type="email"
+            label="E-mail"
+            :errors="errors"
+            placeholder="Type in e-mail"
+            @blur="onEmailChanged"
+          />
+        </div>
+
+        <BaseAppButton
+          :disabled="submitting"
+          :class="{ submitting: 'cursor-not-allowed' }"
+          type="submit"
+          color="red"
+          size="lg"
+          class="text-white"
+          expanded
+          @click.prevent="onSubmit"
         >
-          <circle
-            class="opacity-25"
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="currentColor"
-            stroke-width="4"
-          ></circle>
-          <path
-            class="opacity-75"
-            fill="currentColor"
-            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-          ></path>
-        </svg>
-        {{ $route.name === 'milf' ? 'Find Members Nearby' : 'Create Account' }}
-      </BaseAppButton>
-    </form>
+          <svg
+            v-if="submitting"
+            class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          {{
+            $route.name === 'milf' ? 'Find Members Nearby' : 'Create Account'
+          }}
+        </BaseAppButton>
+      </form>
+    </ValidationObserver>
   </div>
 </template>
 
@@ -145,9 +176,22 @@ import IconUser from '@/assets/svg/user.svg?inline'
 import IconGoogle from '@/assets/svg/google-logo.svg?inline'
 import City from '@/models/City'
 import User from '@/models/User'
+import { withValidation } from 'vee-validate'
+import BaseAppInput from '@/components/base/AppInput'
+import { ValidationProvider } from 'vee-validate'
+import { ValidationObserver } from 'vee-validate'
+
+const InputValidation = withValidation(BaseAppInput)
 
 export default {
-  components: { IconUser, IconGoogle, VueAutosuggest },
+  components: {
+    IconUser,
+    IconGoogle,
+    VueAutosuggest,
+    InputValidation,
+    ValidationProvider,
+    ValidationObserver,
+  },
 
   data() {
     return {
@@ -158,6 +202,9 @@ export default {
         lng: '',
         choice: null,
         email: '',
+        username: '',
+        looking_for: 'female',
+        gender: 'male',
       }),
       cities: [],
       submitting: false,
@@ -231,13 +278,21 @@ export default {
 
   created() {
     this.geolocation()
+    this.onEmailChanged()
   },
 
   methods: {
+    async onSubmit() {
+      // check if form is valid
+      this.$refs.form.validate().then((success) => {
+        if (!success) return
+
+        // if valid submit
+        this.submit()
+      })
+    },
+
     async submit() {
-      if (!(await this.$validator.validate())) {
-        return false
-      }
       this.submitting = true
       try {
         const { uuid } = await this.profile.register()
@@ -271,9 +326,6 @@ export default {
         this.profile.lives_in_display = this.$options.filters.cityName(
           city.item.name
         )
-        // this.$nextTick(() => {
-        //   this.$validator._base.validate('lives_in')
-        // })
       }
     },
 
@@ -305,6 +357,35 @@ export default {
 
     renderSuggestion(suggestion) {
       return this.$createElement('div', suggestion.item.name)
+    },
+
+    onEmailChanged() {
+      if (this.profile.email) {
+        this.generateUsername()
+      }
+    },
+
+    setGender() {
+      const gender = this.profile.preferences.split('_')
+      const selection = {
+        m: 'male',
+        f: 'female',
+      }
+
+      this.profile.gender = selection[gender[0]] || 'male'
+      this.profile.looking_for = selection[gender[1]] || 'female'
+    },
+
+    generateUsername() {
+      this.$axios
+        .post('/register/generate-username', { email: this.profile.email })
+        .then((res) => {
+          console.log('res', res.data.username)
+          this.profile.username = res.data.username
+        })
+        .catch((err) => {
+          this.$setErrorsFromResponse(err.response.data)
+        })
     },
   },
 }

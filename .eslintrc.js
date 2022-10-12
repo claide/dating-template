@@ -7,7 +7,6 @@ module.exports = {
   },
   parserOptions: {
     parser: '@babel/eslint-parser',
-    // requireConfigFile: false,
   },
   extends: [
     'plugin:vue/recommended',
@@ -15,20 +14,14 @@ module.exports = {
     'prettier',
     'plugin:prettier/recommended',
   ],
-  plugins: ['jest', 'prettier'],
+  plugins: ['jest', 'prettier', 'no-empty-blocks'],
   // add your custom rules here
   rules: {
-    // 'prettier/prettier': ['error'],
-    // 'vue/html-indent': ['error', 2],
-    // 'vue/singleline-html-element-content-newline': 0,
     'vue/component-name-in-template-casing': ['error', 'PascalCase'],
-    // 'import/no-named-as-default': 0,
-    // 'vue/valid-v-slot': [
-    //   'error',
-    //   {
-    //     allowModifiers: true,
-    //   },
-    // ],
+    'vue/multi-word-component-names': 0,
+    'no-empty': 0,
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },
   globals: {
     $nuxt: true,

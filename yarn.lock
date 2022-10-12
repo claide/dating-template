@@ -4854,6 +4854,11 @@ eslint-plugin-n@^15.2.5:
     resolve "^1.22.1"
     semver "^7.3.7"
 
+eslint-plugin-no-empty-blocks@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-no-empty-blocks/-/eslint-plugin-no-empty-blocks-0.0.2.tgz#cdf7a1fbd10508387b7e6a36ee4c9b9b23b109b9"
+  integrity sha512-wjgc1qVlFsV30cHSuic2Z59uh/cLluHVFaI1uYc7fSzAy13x+ZT36GEJSyE1U8rDYvhkPAzGDhmhGsrddCCULA==
+
 eslint-plugin-node@^11.1.0:
   version "11.1.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-node/-/eslint-plugin-node-11.1.0.tgz#c95544416ee4ada26740a30474eefc5402dc671d"
