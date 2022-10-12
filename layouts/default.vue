@@ -12,6 +12,6 @@
 
 <script>
 export default {
-  name: 'Guest'
+  name: 'Guest',
 }
 </script>

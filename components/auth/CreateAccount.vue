@@ -1,7 +1,11 @@
 <template>
-  <div class="bg-white rounded p-4 md:p-8 w-[90%] md:w-[75%] lg:w-[45%] shadow-lg mt-[11rem] md:mt-[20rem] lg:mt-0">
+  <div
+    class="bg-white rounded p-4 md:p-8 w-[90%] md:w-[75%] lg:w-[45%] shadow-lg mt-[11rem] md:mt-[20rem] lg:mt-0"
+  >
     <div class="text-center mb-6">
-      <h2 class="capitalize text-2xl md:text-3xl font-medium mb-3">Create a free account</h2>
+      <h2 class="capitalize text-2xl md:text-3xl font-medium mb-3">
+        Create a free account
+      </h2>
       <div class="flex items-center justify-center text-sm md:text-base">
         <IconUser class="w-6 h-6 mr-2" />
         421,265 people have already joined
@@ -16,7 +20,9 @@
       <div class="absolute ml-[1px] w-[40px] h-[40px] rounded bg-white">
         <IconGoogle class="h-[18px] w-[18px] mt-[11px] ml-[11px]" />
       </div>
-      <span class="text-center mx-auto text-gray-600 font-medium">Log in with Google</span>
+      <span class="text-center mx-auto text-gray-600 font-medium"
+      >Log in with Google</span
+      >
     </a>
     <!-- End login with Google -->
 
@@ -28,20 +34,34 @@
 
     <form class="relative">
       <div class="mb-4">
-        <label for="gender" class="block mb-2 font-medium text-gray-900 text-sm">I am</label>
+        <label for="gender" class="block mb-2 font-medium text-gray-900 text-sm"
+        >I am</label
+        >
         <BaseAppDropdown v-model="profile.preferences">
           <template #trigger>
             {{ genderTriggerText }}
           </template>
-          <BaseAppDropdownItem value="m_f">a man looking for a woman</BaseAppDropdownItem>
-          <BaseAppDropdownItem value="m_m">a man looking for a man</BaseAppDropdownItem>
-          <BaseAppDropdownItem value="f_m">a woman looking for a man</BaseAppDropdownItem>
-          <BaseAppDropdownItem value="f_f">a woman looking for a woman</BaseAppDropdownItem>
+          <BaseAppDropdownItem value="m_f"
+          >a man looking for a woman</BaseAppDropdownItem
+          >
+          <BaseAppDropdownItem value="m_m"
+          >a man looking for a man</BaseAppDropdownItem
+          >
+          <BaseAppDropdownItem value="f_m"
+          >a woman looking for a man</BaseAppDropdownItem
+          >
+          <BaseAppDropdownItem value="f_f"
+          >a woman looking for a woman</BaseAppDropdownItem
+          >
         </BaseAppDropdown>
       </div>
 
       <div class="mb-4">
-        <label for="location" class="block mb-2 font-medium text-gray-900 text-sm">Lives in</label>
+        <label
+          for="location"
+          class="block mb-2 font-medium text-gray-900 text-sm"
+        >Lives in</label
+        >
         <VueAutosuggest
           ref="autosuggest"
           v-model="profile.lives_in"
@@ -55,19 +75,29 @@
       </div>
 
       <div class="mb-4">
-        <label for="gender" class="block mb-2 font-medium text-gray-900 text-sm">Your preference</label>
+        <label for="gender" class="block mb-2 font-medium text-gray-900 text-sm"
+        >Your preference</label
+        >
         <BaseAppDropdown v-model="profile.choice">
           <template #trigger>
             {{ preferenceTriggerText }}
           </template>
-          <BaseAppDropdownItem v-for="(item, i) in preferencesList" :key="i" :value="item">{{
-            item
-          }}</BaseAppDropdownItem>
+          <BaseAppDropdownItem
+            v-for="(item, i) in preferencesList"
+            :key="i"
+            :value="item"
+          >{{ item }}</BaseAppDropdownItem
+          >
         </BaseAppDropdown>
       </div>
 
       <div class="mb-4">
-        <BaseAppInput v-model="profile.email" type="email" label="E-mail" placeholder="Type in e-mail" />
+        <BaseAppInput
+          v-model="profile.email"
+          type="email"
+          label="E-mail"
+          placeholder="Type in e-mail"
+        />
       </div>
 
       <BaseAppButton
@@ -87,7 +117,14 @@
           fill="none"
           viewBox="0 0 24 24"
         >
-          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
           <path
             class="opacity-75"
             fill="currentColor"
@@ -147,7 +184,8 @@ export default {
     genderTriggerText() {
       if (this.profile.preferences === 'm_m') return 'a man looking for a man'
       if (this.profile.preferences === 'f_m') return 'a woman looking for a man'
-      if (this.profile.preferences === 'f_f') return 'a woman looking for a woman'
+      if (this.profile.preferences === 'f_f')
+        return 'a woman looking for a woman'
       return 'a man looking for a woman'
     },
 
@@ -163,7 +201,9 @@ export default {
       return [
         {
           data: this.cities.filter((item) => {
-            return item.name.toLowerCase().includes(this.profile.lives_in.toLowerCase())
+            return item.name
+              .toLowerCase()
+              .includes(this.profile.lives_in.toLowerCase())
           }),
         },
       ]
@@ -183,7 +223,9 @@ export default {
 
     registeredUsersCount() {
       const diffInDays = dayjs().diff(dayjs('2020-05-18'), 'day')
-      return (180000 + diffInDays * 365).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+      return (180000 + diffInDays * 365)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')
     },
   },
 
@@ -226,7 +268,9 @@ export default {
         this.profile.lives_in = city.item.name
         this.profile.lat = city.item.lat
         this.profile.lng = city.item.lng
-        this.profile.lives_in_display = this.$options.filters.cityName(city.item.name)
+        this.profile.lives_in_display = this.$options.filters.cityName(
+          city.item.name
+        )
         // this.$nextTick(() => {
         //   this.$validator._base.validate('lives_in')
         // })
@@ -316,7 +360,8 @@ export default {
 .autosuggest__results .autosuggest__results-item:active,
 .autosuggest__results .autosuggest__results-item:hover,
 .autosuggest__results .autosuggest__results-item:focus,
-.autosuggest__results .autosuggest__results-item.autosuggest__results-item--highlighted {
+.autosuggest__results
+  .autosuggest__results-item.autosuggest__results-item--highlighted {
   background-color: #5046e3;
   color: #fff;
 }

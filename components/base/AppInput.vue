@@ -1,6 +1,11 @@
 <template>
   <div>
-    <label v-if="label" :for="id" class="block mb-2 font-medium text-gray-900 text-sm">{{ label }}</label>
+    <label
+      v-if="label"
+      :for="id"
+      class="block mb-2 font-medium text-gray-900 text-sm"
+    >{{ label }}</label
+    >
     <div class="relative">
       <input
         :id="id"

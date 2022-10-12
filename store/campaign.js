@@ -6,11 +6,11 @@ export const state = () => ({
   s5: null,
   gclid: '',
   tracking_id: null,
-  landing: 1
+  landing: 1,
 })
 
 export const mutations = {
-  SET (state, campaign) {
+  SET(state, campaign) {
     state.s1 = campaign.s1
     state.s2 = campaign.s2
     state.s3 = campaign.s3
@@ -19,5 +19,5 @@ export const mutations = {
     state.gclid = campaign.gclid
     state.tracking_id = campaign.tracking_id
     state.landing = campaign.landing || 1
-  }
+  },
 }

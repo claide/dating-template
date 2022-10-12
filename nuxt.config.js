@@ -23,13 +23,23 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@plugins/vue-api-query', '@plugins/filters', '@plugins/axios', '@plugins/validator'],
+  plugins: [
+    '@plugins/vue-api-query',
+    '@plugins/filters',
+    '@plugins/axios',
+    '@plugins/validator',
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/tailwindcss', '@nuxtjs/svg', '@nuxtjs/color-mode'],
+  buildModules: [
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/svg',
+    '@nuxtjs/color-mode',
+  ],
 
   colorMode: {
     preference: 'system', // default value of $colorMode.preference
@@ -90,5 +100,8 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    // add exception
+    transpile: ['vee-validate/dist/rules'],
+  },
 }

@@ -6,53 +6,37 @@
           <AppLogo class="mr-0 md:mr-8 h-6 sm:h-10" />
         </nuxt-link>
         <div>
-          <span class="text-lg md:text-xl text-white mb-3 block">ShagToday</span>
+          <span class="text-lg md:text-xl text-white mb-3 block"
+          >ShagToday</span
+          >
           <ul class="leading-loose">
             <li>
-              <nuxt-link
-                to="/dashboard"
-                class="hover:text-primary"
-              >
+              <nuxt-link to="/dashboard" class="hover:text-primary">
                 Browse profiles
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link
-                to="/messages"
-                class="hover:text-primary"
-              >
+              <nuxt-link to="/messages" class="hover:text-primary">
                 Messages
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link
-                to="/my-profile"
-                class="hover:text-primary"
-              >
+              <nuxt-link to="/my-profile" class="hover:text-primary">
                 My Profile
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link
-                to="/my-visitors"
-                class="hover:text-primary"
-              >
+              <nuxt-link to="/my-visitors" class="hover:text-primary">
                 My visitors
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link
-                to="/credits/buy"
-                class="hover:text-primary"
-              >
+              <nuxt-link to="/credits/buy" class="hover:text-primary">
                 Buy credits
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link
-                to="/account"
-                class="hover:text-primary"
-              >
+              <nuxt-link to="/account" class="hover:text-primary">
                 Account Settings
               </nuxt-link>
             </li>
@@ -68,34 +52,22 @@
           <span class="text-lg md:text-xl text-white mb-3 block">About Us</span>
           <ul class="leading-loose">
             <li>
-              <nuxt-link
-                to="/prices"
-                class="hover:text-primary"
-              >
+              <nuxt-link to="/prices" class="hover:text-primary">
                 Prices
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link
-                to="/how-to-pay"
-                class="hover:text-primary"
-              >
+              <nuxt-link to="/how-to-pay" class="hover:text-primary">
                 How To Pay
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link
-                to="/legal/terms"
-                class="hover:text-primary"
-              >
+              <nuxt-link to="/legal/terms" class="hover:text-primary">
                 Terms of Use
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link
-                to="/legal/privacy"
-                class="hover:text-primary"
-              >
+              <nuxt-link to="/legal/privacy" class="hover:text-primary">
                 Privacy Policy
               </nuxt-link>
             </li>
@@ -106,31 +78,20 @@
           <span class="text-lg md:text-xl text-white mb-3 block">Support</span>
           <ul class="leading-loose">
             <li>
-              <nuxt-link
-                to="/report-abuse"
-                class="hover:text-primary"
-              >
+              <nuxt-link to="/report-abuse" class="hover:text-primary">
                 Report Abuse
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/faq" class="hover:text-primary">
-                FAQ
-              </nuxt-link>
+              <nuxt-link to="/faq" class="hover:text-primary"> FAQ </nuxt-link>
             </li>
             <li>
-              <nuxt-link
-                to="/helpdesk"
-                class="hover:text-primary"
-              >
+              <nuxt-link to="/helpdesk" class="hover:text-primary">
                 Helpdesk
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link
-                to="/submit-request"
-                class="hover:text-primary"
-              >
+              <nuxt-link to="/submit-request" class="hover:text-primary">
                 Submit a Request
               </nuxt-link>
             </li>
@@ -164,11 +125,10 @@
           <li>
             All members and persons appearing on this site are over 18 years of
             age.
-            <a
-              href="#"
-              class="text-white"
+            <a href="#" class="text-white"
             >18 U.S.C. 2257 Record Keeping Requirements Compliance
-              Statement</a>
+              Statement</a
+            >
           </li>
         </ul>
       </div>
@@ -176,20 +136,13 @@
       <ul
         class="list-inside flex flex-col md:flex-row text-sm text-slate-400 leading-loose"
       >
-        <li class="mr-4">
-          &copy; 2021 - 2022 TRF Networks Co., Ltd.
-        </li>
-        <li class="md:mx-4">
-          All rights reserved
-        </li>
+        <li class="mr-4">&copy; 2021 - 2022 TRF Networks Co., Ltd.</li>
+        <li class="md:mx-4">All rights reserved</li>
         <li class="md:mx-4">
           Our services are for entertainment purposes only.
         </li>
         <li class="md:mx-4">
-          <nuxt-link
-            to="/affiliates"
-            class="text-white hover:text-primary"
-          >
+          <nuxt-link to="/affiliates" class="text-white hover:text-primary">
             Affiliates
           </nuxt-link>
         </li>
@@ -202,6 +155,6 @@
 import AppLogo from '~/assets/svg/logo.svg?inline'
 
 export default {
-  components: { AppLogo }
+  components: { AppLogo },
 }
 </script>

@@ -38,9 +38,16 @@ const mergeFn = (target, source, deep = false) => {
   if (deep || !Object.assign) {
     const isDeep = (prop) =>
       // eslint-disable-next-line no-prototype-builtins
-      isObject(source[prop]) && target !== null && target.hasOwnProperty(prop) && isObject(target[prop])
+      isObject(source[prop]) &&
+      target !== null &&
+      target.hasOwnProperty(prop) &&
+      isObject(target[prop])
     const replaced = Object.getOwnPropertyNames(source)
-      .map((prop) => ({ [prop]: isDeep(prop) ? mergeFn(target[prop], source[prop], deep) : source[prop] }))
+      .map((prop) => ({
+        [prop]: isDeep(prop)
+          ? mergeFn(target[prop], source[prop], deep)
+          : source[prop],
+      }))
       .reduce((a, b) => ({ ...a, ...b }), {})
 
     return {

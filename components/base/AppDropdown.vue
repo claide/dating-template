@@ -14,7 +14,9 @@
           <slot name="trigger" :active="isActive" />
         </span>
       </span>
-      <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+      <span
+        class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2"
+      >
         <!-- Heroicon name: mini/chevron-up-down -->
         <svg
           class="h-5 w-5 text-slate-400"
@@ -92,7 +94,11 @@ export default {
 
   computed: {
     cancelOptions() {
-      return typeof this.canClose === 'boolean' ? (this.canClose ? DEFAULT_CLOSE_OPTIONS : []) : this.canClose
+      return typeof this.canClose === 'boolean'
+        ? this.canClose
+          ? DEFAULT_CLOSE_OPTIONS
+          : []
+        : this.canClose
     },
 
     hoverable() {
@@ -145,7 +151,9 @@ export default {
     clickedOutside(event) {
       if (!this.cancelOptions.includes('outside')) return
       if (this.inline) return
-      const target = isCustomElement(this) ? event.composedPath()[0] : event.target
+      const target = isCustomElement(this)
+        ? event.composedPath()[0]
+        : event.target
       if (!this.isInWhiteList(target)) this.isActive = false
     },
 

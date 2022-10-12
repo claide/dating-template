@@ -36,6 +36,7 @@ export default ({ app }) => {
     const errorFields = Object.keys(errorResponse.errors)
 
     // insert laravel errors
+    // eslint-disable-next-line array-callback-return
     errorFields.map((field) => {
       const error = errorResponse.errors[field]
       let msg = ''

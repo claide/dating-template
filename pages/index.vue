@@ -2,9 +2,15 @@
   <div>
     <GuestAppHero />
 
-    <section class="container mx-auto px-2 sm:px-4 py-12 md:py-16 text-center section-tagline">
-      <h1 class="text-3xl md:text-5xl font-medium mb-4 dark:text-slate-300">Register now. It’s free</h1>
-      <p class="text-lg md:text-xl dark:text-slate-300">Sign Up, Get Unlimited Access And Start Chatting</p>
+    <section
+      class="container mx-auto px-2 sm:px-4 py-12 md:py-16 text-center section-tagline"
+    >
+      <h1 class="text-3xl md:text-5xl font-medium mb-4 dark:text-slate-300">
+        Register now. It’s free
+      </h1>
+      <p class="text-lg md:text-xl dark:text-slate-300">
+        Sign Up, Get Unlimited Access And Start Chatting
+      </p>
     </section>
 
     <!-- Begin banner -->
