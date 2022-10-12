@@ -13,7 +13,7 @@
         v-bind="$attrs"
         :type="type"
         :value="value"
-        class="w-full rounded-md border border-slate-300 bg-slate-100 py-2.5 pl-3 pr-10 text-left shadow-sm sm:text-sm"
+        class="w-full rounded-md border border-slate-300 bg-slate-100 py-2.5 pl-3 pr-10 text-left sm:text-sm"
         :class="[classes]"
         :placeholder="placeholder"
         @input="$emit('input', $event.target.value)"

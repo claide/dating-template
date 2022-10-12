@@ -1,4 +1,5 @@
 require('dotenv').config()
+import config from './utils/config'
 
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
@@ -6,7 +7,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: '%s - Shagtoday',
+    titleTemplate: '%s - ' + config.defaultSiteName,
     htmlAttrs: {
       lang: 'en',
     },

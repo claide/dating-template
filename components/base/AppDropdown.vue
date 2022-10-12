@@ -3,7 +3,7 @@
     <button
       ref="trigger"
       type="button"
-      class="relative w-full cursor-default rounded-md border border-slate-300 bg-slate-100 py-2.5 pl-3 pr-10 text-left shadow-sm focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 sm:text-sm"
+      class="relative w-full cursor-default rounded-md border border-slate-300 bg-slate-100 py-2.5 pl-3 pr-10 text-left focus:border-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-500 sm:text-sm"
       aria-haspopup="listbox"
       aria-expanded="true"
       aria-labelledby="listbox-label"
