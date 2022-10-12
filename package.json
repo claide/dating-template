@@ -21,6 +21,7 @@
     "dotenv": "^16.0.3",
     "lodash": "^4.17.21",
     "nuxt": "^2.15.8",
+    "vee-validate": "<3.0.0",
     "vue": "^2.7.10",
     "vue-api-query": "^1.10.0",
     "vue-autosuggest": "^2.2.0",

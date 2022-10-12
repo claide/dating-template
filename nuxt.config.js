@@ -23,7 +23,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@plugins/vue-api-query', '@plugins/filters', '@plugins/axios'],
+  plugins: ['@plugins/vue-api-query', '@plugins/filters', '@plugins/axios', '@plugins/validator'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
