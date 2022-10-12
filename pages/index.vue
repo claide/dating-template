@@ -6,6 +6,26 @@
       <h1 class="text-3xl md:text-5xl font-medium mb-4 dark:text-slate-300">Register now. It’s free</h1>
       <p class="text-lg md:text-xl dark:text-slate-300">Sign Up, Get Unlimited Access And Start Chatting</p>
     </section>
+
+    <!-- Begin banner -->
+    <img
+      v-if="+$store.state.campaign.landing === 1"
+      src="https://assets.shagtoday.co.uk/st/img/banner-desktop.png"
+      class="hidden md:block"
+      alt="models"
+    />
+    <img
+      v-if="+$store.state.campaign.landing === 1"
+      src="https://assets.shagtoday.co.uk/st/img/banner-mobile.png"
+      class="block md:hidden"
+      alt="models"
+    />
+    <img
+      v-if="+$store.state.campaign.landing === 2"
+      src="https://assets.shagtoday.co.uk/st/img/bottom-banner-adult.jpg"
+      alt="models"
+    />
+    <!-- End banner -->
   </div>
 </template>
 

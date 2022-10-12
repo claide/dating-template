@@ -8,7 +8,7 @@
         v-bind="$attrs"
         :type="type"
         :value="value"
-        class="w-full cursor-default rounded-md border border-slate-300 bg-slate-100 py-2.5 pl-3 pr-10 text-left shadow-sm sm:text-sm"
+        class="w-full rounded-md border border-slate-300 bg-slate-100 py-2.5 pl-3 pr-10 text-left shadow-sm sm:text-sm"
         :class="[
           {
             'border-red-400': errors.length,
@@ -16,6 +16,7 @@
           },
           classes,
         ]"
+        :placeholder="placeholder"
         @input="$emit('input', $event.target.value)"
         @keydown="$emit('keydown', $event)"
         @blur="$emit('blur', $event)"
@@ -57,6 +58,10 @@ export default {
     bordered: {
       type: Boolean,
       default: false,
+    },
+    placeholder: {
+      type: String,
+      default: 'Field name',
     },
   },
 

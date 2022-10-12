@@ -67,7 +67,7 @@
       </div>
 
       <div class="mb-4">
-        <BaseAppInput v-model="profile.email" type="email" label="E-mail" />
+        <BaseAppInput v-model="profile.email" type="email" label="E-mail" placeholder="Type in e-mail" />
       </div>
 
       <BaseAppButton
