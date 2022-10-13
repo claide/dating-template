@@ -1,7 +1,10 @@
 <template>
   <div class="bg-white dark:bg-gray-900 guest">
     <!-- Show if offline -->
-    <div v-if="$nuxt.isOffline" class="text-center bg-red-600 text-white">
+    <div
+      v-if="$nuxt.isOffline"
+      class="text-center bg-red-700 text-white dark:text-slate-200"
+    >
       Oops! Looks like you're offline.
     </div>
     <BaseAppNavbar />

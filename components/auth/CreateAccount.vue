@@ -34,65 +34,66 @@
 
     <ValidationObserver ref="form">
       <form class="relative">
-        <div class="mb-4">
-          <label
-            for="gender"
-            class="block mb-2 font-medium text-gray-900 text-sm"
-            >I am</label
-          >
-          <BaseAppDropdown v-model="profile.preferences" @input="setGender">
-            <template #trigger>
-              {{ genderTriggerText }}
-            </template>
-            <BaseAppDropdownItem value="m_f"
-              >a man looking for a woman</BaseAppDropdownItem
+        <div v-if="currentStep === 1">
+          <div class="mb-4">
+            <label
+              for="gender"
+              class="block mb-2 font-medium text-gray-900 text-sm"
+              >I am</label
             >
-            <BaseAppDropdownItem value="m_m"
-              >a man looking for a man</BaseAppDropdownItem
-            >
-            <BaseAppDropdownItem value="f_m"
-              >a woman looking for a man</BaseAppDropdownItem
-            >
-            <BaseAppDropdownItem value="f_f"
-              >a woman looking for a woman</BaseAppDropdownItem
-            >
-          </BaseAppDropdown>
-        </div>
+            <BaseAppDropdown v-model="profile.preferences" @input="setGender">
+              <template #trigger>
+                {{ genderTriggerText }}
+              </template>
+              <BaseAppDropdownItem value="m_f"
+                >a man looking for a woman</BaseAppDropdownItem
+              >
+              <BaseAppDropdownItem value="m_m"
+                >a man looking for a man</BaseAppDropdownItem
+              >
+              <BaseAppDropdownItem value="f_m"
+                >a woman looking for a man</BaseAppDropdownItem
+              >
+              <BaseAppDropdownItem value="f_f"
+                >a woman looking for a woman</BaseAppDropdownItem
+              >
+            </BaseAppDropdown>
+          </div>
 
-        <div class="mb-4">
-          <label
-            for="location"
-            class="block mb-2 font-medium text-gray-900 text-sm"
-            >Lives in</label
-          >
-          <ValidationProvider
-            v-slot="{ errors }"
-            name="Location"
-            rules="required"
-          >
-            <VueAutosuggest
-              ref="autosuggest"
-              v-model="profile.lives_in"
-              :suggestions="filteredSuggestions"
-              :input-props="inputProps"
-              :get-suggestion-value="(s) => s.item.name"
-              :render-suggestion="renderSuggestion"
-              @input="getCities"
-              @selected="onCitySelect"
-            />
-            <span v-if="errors" class="mt-1 block text-sm text-red-500">{{
-              errors[0]
-            }}</span>
-          </ValidationProvider>
-        </div>
+          <div class="mb-4">
+            <label
+              for="location"
+              class="block mb-2 font-medium text-gray-900 text-sm"
+              >Lives in</label
+            >
+            <ValidationProvider
+              ref="location"
+              v-slot="{ errors }"
+              name="Location"
+              rules="required"
+            >
+              <VueAutosuggest
+                ref="autosuggest"
+                v-model="profile.lives_in"
+                :suggestions="filteredSuggestions"
+                :input-props="inputProps"
+                :get-suggestion-value="(s) => s.item.name"
+                :render-suggestion="renderSuggestion"
+                @input="getCities"
+                @selected="onCitySelect"
+              />
+              <span v-if="errors" class="mt-1 block text-sm text-red-500">{{
+                errors[0]
+              }}</span>
+            </ValidationProvider>
+          </div>
 
-        <div class="mb-4">
-          <label
-            for="gender"
-            class="block mb-2 font-medium text-gray-900 text-sm"
-            >Age</label
-          >
-          <ValidationProvider v-slot="{ errors }" rules="required" name="Age">
+          <div class="mb-4">
+            <label
+              for="gender"
+              class="block mb-2 font-medium text-gray-900 text-sm"
+              >Age</label
+            >
             <BaseAppDropdown v-model="profile.age">
               <template #trigger>
                 {{ profile.age }}
@@ -102,52 +103,51 @@
                 <span v-else>{{ n + 17 }}</span></BaseAppDropdownItem
               >
             </BaseAppDropdown>
-            <span v-if="errors" class="mt-1 block text-sm text-red-500">{{
-              errors[0]
-            }}</span>
-          </ValidationProvider>
+          </div>
         </div>
 
-        <div class="mb-4">
-          <label
-            for="gender"
-            class="block mb-2 font-medium text-gray-900 text-sm"
-            >Your preference</label
-          >
-          <ValidationProvider
-            v-slot="{ errors }"
-            rules="required"
-            name="Preference"
-          >
-            <BaseAppDropdown v-model="profile.choice">
-              <template #trigger>
-                {{ preferenceTriggerText }}
-              </template>
-              <BaseAppDropdownItem
-                v-for="(item, i) in preferencesList"
-                :key="i"
-                :value="item"
-                >{{ item }}</BaseAppDropdownItem
-              >
-            </BaseAppDropdown>
-            <span v-if="errors" class="mt-1 block text-sm text-red-500">{{
-              errors[0]
-            }}</span>
-          </ValidationProvider>
-        </div>
+        <div v-if="currentStep === 2">
+          <div class="mb-4">
+            <label
+              for="gender"
+              class="block mb-2 font-medium text-gray-900 text-sm"
+              >Your preference</label
+            >
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required"
+              name="Preference"
+            >
+              <BaseAppDropdown v-model="profile.choice">
+                <template #trigger>
+                  {{ preferenceTriggerText }}
+                </template>
+                <BaseAppDropdownItem
+                  v-for="(item, i) in preferencesList"
+                  :key="i"
+                  :value="item"
+                  >{{ item }}</BaseAppDropdownItem
+                >
+              </BaseAppDropdown>
+              <span v-if="errors" class="mt-1 block text-sm text-red-500">{{
+                errors[0]
+              }}</span>
+            </ValidationProvider>
+          </div>
 
-        <div class="mb-4">
-          <InputValidation
-            v-slot="{ errors }"
-            v-model="profile.email"
-            name="E-mail"
-            rules="required|email"
-            type="email"
-            label="E-mail"
-            :errors="errors"
-            placeholder="Type in e-mail"
-            @blur="onEmailChanged"
-          />
+          <div class="mb-4">
+            <InputValidation
+              v-slot="{ errors }"
+              v-model="profile.email"
+              name="E-mail"
+              rules="required|email"
+              type="email"
+              label="E-mail"
+              :errors="errors"
+              placeholder="Type in e-mail"
+              @blur="onEmailChanged"
+            />
+          </div>
         </div>
 
         <BaseAppButton
@@ -182,7 +182,8 @@
             ></path>
           </svg>
           {{
-            $route.name === 'milf' ? 'Find Members Nearby' : 'Create Account'
+            ($route.name === 'milf' ? 'Find Members Nearby' : 'Create Account',
+            currentStep === 1 ? 'Continue' : 'Create Account')
           }}
         </BaseAppButton>
       </form>
@@ -230,8 +231,16 @@ export default {
         age: 20,
       }),
       cities: [],
+      currentStep: 1,
       submitting: false,
       selectedLocation: null,
+      s1: this.$store.state.campaign.s1,
+      s2: this.$store.state.campaign.s2,
+      s3: this.$store.state.campaign.s3,
+      s4: this.$store.state.campaign.s4,
+      s5: this.$store.state.campaign.s5,
+      gclid: this.$store.state.campaign.gclid,
+      tracking_id: this.$store.state.campaign.tracking_id,
       inputProps: {
         name: 'lives_in',
         field: 'name',
@@ -307,25 +316,34 @@ export default {
   methods: {
     async onSubmit() {
       // check if form is valid
-      if (!this.$refs.form.validate()) {
-        return false
-      }
-
-      this.submitting = true
-      try {
-        const { uuid } = await this.profile.register()
-        await this.uploadImage(uuid)
-        this.$router.push({
-          path: '/confirm-email',
-          query: {
-            uuid,
-            email: this.profile.email,
-          },
+      if (this.currentStep === 1) {
+        this.$refs.location.validate().then((res) => {
+          if (!res.valid) return
+          this.currentStep = 2
         })
-      } catch (e) {
-        console.log('e', e)
+      } else {
+        if (this.currentStep === 2) {
+          if (!this.$refs.form.validate()) {
+            return false
+          }
+
+          this.submitting = true
+          try {
+            const { uuid } = await this.profile.register()
+            // await this.uploadImage(uuid)
+            this.$router.push({
+              path: '/confirm-email',
+              query: {
+                uuid,
+                email: this.profile.email,
+              },
+            })
+          } catch (e) {
+            console.log('e', e)
+          }
+          this.submitting = false
+        }
       }
-      this.submitting = false
     },
 
     getCities: debounce(async function (name = '') {
@@ -335,8 +353,6 @@ export default {
     }, 500),
 
     onCitySelect(city) {
-      // eslint-disable-next-line no-console
-      console.log('city', city)
       if (city) {
         this.profile.lives_in = city.item.name
         this.profile.lat = city.item.lat

@@ -7,5 +7,11 @@
 <script>
 export default {
   middleware: 'auth',
+
+  head() {
+    return {
+      title: this.$t('pages.dashboard'),
+    }
+  },
 }
 </script>

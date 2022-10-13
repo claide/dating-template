@@ -198,5 +198,14 @@ export default {
       account_settings: 'Account Settings',
       logout: 'Logout',
     },
+
+    pages: {
+      dashboard: 'Search',
+      confirm_email: 'Confirm Email',
+      pricing: 'Pricing',
+      how_to_pay: 'How to Pay',
+      terms: 'Terms of Use',
+      privacy: 'Privacy Policy',
+    },
   },
 }

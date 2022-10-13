@@ -71,7 +71,7 @@ export default {
   },
   head() {
     return {
-      title: 'How to pay',
+      title: this.$t('pages.how_to_pay'),
     }
   },
 }

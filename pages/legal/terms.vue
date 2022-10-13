@@ -603,7 +603,7 @@ export default {
   },
   head() {
     return {
-      title: 'Terms of use',
+      title: this.$t('pages.terms'),
     }
   },
 

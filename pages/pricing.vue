@@ -4,7 +4,7 @@
       <h1
         class="text-2xl md:text-3xl lg:text-5xl text-center text-black font-extrabold leading-tight dark:text-slate-300"
       >
-        Prices
+        Pricing
       </h1>
       <p
         class="mt-4 sm:mt-8 text-gray-600 dark:text-gray-400 font-normal text-center text-lg sm:text-lg"
@@ -67,7 +67,7 @@ export default {
   },
   head() {
     return {
-      title: 'Prices',
+      title: this.$t('pages.pricing'),
     }
   },
 }
