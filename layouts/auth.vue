@@ -1,49 +1,14 @@
 <template>
-  <div class="auth bg-[#F1F4F8] dark:bg-gray-900">
-    <!-- Begin navbar -->
-    <!-- <AuthNavbar /> -->
-    <!-- <navbar /> -->
-    <!-- End navbar -->
-    <div>
-      <!-- Begin dashboard nav -->
-      <!-- <AuthHeader /> -->
-      <!-- End dashboard nav -->
-      <nuxt
-        id="wrapper"
-        :class="{ 'pt-2': $route.name != 'messages-id' }"
-        class="h-full min-h-[calc(100vh-200px)] lg:pt-6 lg:pb-12"
-      />
+  <div class="bg-white dark:bg-gray-900 guest">
+    <!-- Show if offline -->
+    <div v-if="$nuxt.isOffline" class="text-center bg-red-600 text-white">
+      Oops! Looks like you're offline.
     </div>
-
-    <!-- Begin footer -->
-    <!-- <BaseFooter /> -->
-    <!-- End footer -->
-    <!-- <notification-handler /> -->
+    <AuthNavbar />
+    <div>
+      <AuthHeader />
+      <Nuxt class="min-h-[calc(100vh-200px)]" />
+    </div>
+    <BaseAppFooter />
   </div>
 </template>
-
-<script>
-// import NotificationHandler from '@/components/notifications/notification-handler'
-
-export default {
-  name: 'AuthLayout',
-
-  // components: {
-  //   NotificationHandler,
-  // },
-
-  middleware: 'deactivated',
-}
-</script>
-
-<style lang="scss" scoped>
-.auth {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
-#wrapper {
-  flex: 1;
-}
-</style>

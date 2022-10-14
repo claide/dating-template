@@ -190,8 +190,8 @@ export default {
       },
     },
     header: {
-      search: 'Search',
-      message: 'Messages',
+      browse: 'Browse',
+      messages: 'Messages',
       my_profile: 'My Profile',
       my_visitors: 'My Visitors',
       buy_credits: 'Buy Credits',
