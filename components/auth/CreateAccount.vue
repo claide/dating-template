@@ -139,13 +139,13 @@
             <InputValidation
               v-slot="{ errors }"
               v-model="profile.email"
+              vid="email"
               name="E-mail"
               rules="required|email"
               type="email"
               label="E-mail"
               :errors="errors"
               placeholder="Type in e-mail"
-              @blur="onEmailChanged"
             />
           </div>
         </div>
@@ -156,7 +156,7 @@
           type="submit"
           color="red"
           size="lg"
-          class="text-white mt-6 block"
+          class="mt-6 block"
           expanded
           @click.prevent="onSubmit"
         >
@@ -328,6 +328,8 @@ export default {
           }
 
           this.submitting = true
+          // generate username
+          this.generateUsername()
           try {
             const { uuid } = await this.profile.register()
             // await this.uploadImage(uuid)
@@ -339,7 +341,9 @@ export default {
               },
             })
           } catch (e) {
-            console.log('e', e)
+            this.$setErrorsFromResponse(e.response.data)
+            console.log(this.$refs.form)
+            // this.$refs.form.setErrors(e.response.data)
           }
           this.submitting = false
         }

@@ -206,6 +206,8 @@ export default {
       how_to_pay: 'How to Pay',
       terms: 'Terms of Use',
       privacy: 'Privacy Policy',
+      faq: 'FAQ',
+      report_abuse: 'Report Abuse',
     },
   },
 }

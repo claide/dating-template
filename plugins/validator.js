@@ -16,6 +16,7 @@ const dict = {
     },
   },
 }
+
 Validator.localize('en', dict)
 
 export default ({ app }) => {
@@ -38,7 +39,7 @@ export default ({ app }) => {
     // insert laravel errors
     // eslint-disable-next-line array-callback-return
     errorFields.map((field) => {
-      const error = errorResponse.errors[field]
+      let error = errorResponse.errors[field].join(', ')
       let msg = ''
 
       if (isArray(error)) {

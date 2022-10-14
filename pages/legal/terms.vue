@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="bg-black">
+    <div class="bg-[#dfe0df] dark:bg-black-100">
       <div class="container mx-auto flex flex-col items-center py-12 sm:py-16">
         <div class="w-11/12 sm:w-2/3 mb-5 sm:mb-10">
           <h1
-            class="text-2xl md:text-3xl lg:text-5xl text-center text-white font-extrabold leading-tight"
+            class="text-2xl md:text-3xl lg:text-5xl text-center text-black dark:text-slate-300 font-extrabold leading-tight"
           >
             Terms of Use
           </h1>
@@ -15,11 +15,10 @@
       class="container mx-auto max-w-6xl px-4 sm:px-6 py-8 md:py-14 text-black-100 dark:text-slate-300 leading-relaxed"
     >
       <div class="flex mb-6">
-        <span
-          class="text-sm p-2 bg-gray-200 dark:bg-slate-500 mr-2 rounded-full"
+        <span class="text-sm p-2 bg-gray-200 dark:bg-gray-800 mr-2 rounded-full"
           >Last updated on 2 December 2019</span
         >
-        <span class="text-sm p-2 bg-gray-200 dark:bg-slate-500 rounded-full"
+        <span class="text-sm p-2 bg-gray-200 dark:bg-gray-800 rounded-full"
           >19 min read</span
         >
       </div>
