@@ -26,8 +26,8 @@
 <script>
 import AppLoading from '~/assets/svg/loading.svg?inline'
 export default {
-  inheritAttrs: false,
   components: { AppLoading },
+  inheritAttrs: false,
 
   props: {
     tag: {
@@ -44,6 +44,7 @@ export default {
     },
     size: {
       type: String,
+      default: 'md',
     },
     type: {
       type: String,

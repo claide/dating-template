@@ -146,41 +146,24 @@
               label="E-mail"
               :errors="errors"
               placeholder="Type in e-mail"
+              @blur="onEmailChanged"
             />
           </div>
         </div>
 
         <BaseAppButton
           :disabled="submitting"
-          :class="{ submitting: 'cursor-not-allowed' }"
-          type="submit"
-          color="red"
+          :class="{ 'cursor-not-allowed': submitting }"
+          type="danger"
           size="lg"
           class="mt-6 block"
           expanded
           @click.prevent="onSubmit"
         >
-          <svg
+          <IconLoader
             v-if="submitting"
-            class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              class="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              stroke-width="4"
-            ></circle>
-            <path
-              class="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            ></path>
-          </svg>
+            class="animate-spin -ml-1 mr-3 h-5 w-5 text-white fill-current"
+          />
           {{
             ($route.name === 'milf' ? 'Find Members Nearby' : 'Create Account',
             currentStep === 1 ? 'Continue' : 'Create Account')
@@ -197,6 +180,7 @@ import dayjs from 'dayjs'
 import { VueAutosuggest } from 'vue-autosuggest'
 import IconUser from '@/assets/svg/user.svg?inline'
 import IconGoogle from '@/assets/svg/google-logo.svg?inline'
+import IconLoader from '@/assets/svg/loader.svg?inline'
 import City from '@/models/City'
 import User from '@/models/User'
 import { withValidation } from 'vee-validate'
@@ -210,6 +194,7 @@ export default {
   components: {
     IconUser,
     IconGoogle,
+    IconLoader,
     VueAutosuggest,
     InputValidation,
     ValidationProvider,
@@ -230,6 +215,7 @@ export default {
         gender: 'male',
         age: 20,
       }),
+      isGeneratingUsername: false,
       cities: [],
       currentStep: 1,
       submitting: false,
@@ -328,11 +314,8 @@ export default {
           }
 
           this.submitting = true
-          // generate username
-          this.generateUsername()
           try {
             const { uuid } = await this.profile.register()
-            // await this.uploadImage(uuid)
             this.$router.push({
               path: '/confirm-email',
               query: {
@@ -342,8 +325,6 @@ export default {
             })
           } catch (e) {
             this.$setErrorsFromResponse(e.response.data)
-            console.log(this.$refs.form)
-            // this.$refs.form.setErrors(e.response.data)
           }
           this.submitting = false
         }
@@ -415,11 +396,12 @@ export default {
     },
 
     generateUsername() {
+      this.isGeneratingUsername = true
       this.$axios
         .post('/register/generate-username', { email: this.profile.email })
         .then((res) => {
-          console.log('res', res.data.username)
           this.profile.username = res.data.username
+          this.isGeneratingUsername = false
         })
         .catch((err) => {
           this.$setErrorsFromResponse(err.response.data)
