@@ -39,7 +39,7 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      noPhoto: require('assets/img/no-photo.png'),
+      noPhoto: 'https://assets.shagtoday.co.uk/st/img/no-photo.png',
     }
   },
 

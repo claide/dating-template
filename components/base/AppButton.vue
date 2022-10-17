@@ -7,9 +7,9 @@
       btnClass,
       {
         [`bg-${color}-600 text-${color}-100 border-${color}-600 hover:bg-${color}-700 hover:border-${color}-700 hover:text-white`]:
-          color && !outline && !type,
+          color && !outline && !variant,
         [`border-${color}-600 bg-white text-${color}-600 hover:bg-${color}-600 hover:border-${color}-600 hover:text-white`]:
-          outline && !type,
+          outline && !variant,
         [`py-2 text-sm ${icon ? 'px-2' : 'px-4'}`]: size === 'sm',
         [`py-2 ${icon ? 'px-3' : 'px-6'}`]: size === 'md',
         [`py-4 text-lg ${icon ? 'px-4' : 'px-12'}`]: size === 'lg',
@@ -46,7 +46,7 @@ export default {
       type: String,
       default: 'md',
     },
-    type: {
+    variant: {
       type: String,
       default: 'primary', //primary, info, warning, danger
     },
@@ -62,13 +62,13 @@ export default {
         //isLoading
         'cursor-not-allowed inline-flex': this.isLoading,
         'cursor-pointer flex': !this.isLoading,
-        //button type
+        //button variant
         'bg-primary text-black hover:bg-yellow-500 font-medium rounded-lg text-md p-3.5 border-primary':
-          this.type === 'primary',
+          this.variant === 'primary',
         'bg-red-700 text-white hover:bg-red-800 font-medium rounded-lg text-md p-3.5 border-red-700':
-          this.type === 'danger',
+          this.variant === 'danger',
         'bg-blue-700 text-white hover:bg-blue-800 font-medium rounded-lg text-md p-3.5 border-blue-700':
-          this.type === 'info',
+          this.variant === 'info',
       }
     },
   },

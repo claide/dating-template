@@ -4,7 +4,7 @@
       <AuthAvatar :src="image" class="h-10 w-10 md:h-14 md:w-14" />
       <img
         v-if="notification.data.action_type === 'PROFILE_VIEW'"
-        src="~assets/img/visibility.png"
+        src="https://assets.shagtoday.co.uk/st/img/visibility.png"
         alt
         class="absolute top-0 right-[-8px] w-7 bg-white p-1 rounded-full"
       />

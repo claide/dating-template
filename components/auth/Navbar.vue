@@ -250,7 +250,7 @@ export default {
       navigation,
       showMobileNav: false,
       notificationHolder: false,
-      noPhoto: require('assets/img/no-photo.png'),
+      noPhoto: 'https://assets.shagtoday.co.uk/st/img/no-photo.png',
       onlineCount: 0,
     }
   },
