@@ -24,13 +24,14 @@
                   <div class="h-full">
                     <!-- visit.visitor.approved_primary_photo.url -->
                     <!-- 'https://assets.shagtoday.co.uk/d1f7c3056c2b760da7b3bbf4ea89fea7/qR4xjpMApRA7C4w5XhEbGRYKnjZ6mfmHR7LPhHXV.jpg' -->
-                    <AvatarFixed
+                    <AuthAvatar
                       :src="
                         visit.visitor.approved_primary_photo
                           ? visit.visitor.approved_primary_photo.url
                           : null
                       "
                       :gender="visit.visitor.gender"
+                      type="thumbnail"
                     />
                     <div
                       class="absolute flex justify-evenly mx-auto bottom-16 left-0 right-0 max-w-[10rem]"
@@ -197,7 +198,6 @@
 
 <script>
 import Visitor from '@/models/Visitor'
-import AvatarFixed from '@/components/avatar-fixed'
 import EventBus from '@/services/eventBus'
 import MaleIcon from '~/assets/icons/male.svg?inline'
 import FemaleIcon from '~/assets/icons/female.svg?inline'
@@ -211,7 +211,6 @@ export default {
     }
   },
   components: {
-    AvatarFixed,
     MaleIcon,
     FemaleIcon,
   },
