@@ -62,7 +62,7 @@ export default {
     },
     email: {
       you_are_receiving:
-        'You are receiving this e-mail because you agreed to receive notiﬁcations when you registered at our website with this e-mailaddress',
+        'You are receiving this e-mail because you agreed to receive notifications when you registered at our website with this e-mail address',
       physical_address: 'Physical address',
       address: 'Geekee Co.,Ltd, Wanchai, Hongkong',
       contact_us: 'Contact us',

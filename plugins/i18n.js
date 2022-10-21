@@ -4,10 +4,9 @@ import messages from '../utils/lang'
 
 Vue.use(VueI18n)
 
-export default ({ app }) => {
-  app.i18n = new VueI18n({
-    locale: 'en',
-    fallbackLocale: 'en',
-    messages: messages,
-  })
-}
+const i18n = new VueI18n({
+  locale: 'en',
+  messages: messages,
+})
+
+export { i18n }

@@ -41,6 +41,7 @@ export default {
     '@nuxtjs/tailwindcss',
     '@nuxtjs/svg',
     '@nuxtjs/color-mode',
+    '@nuxtjs/toast',
   ],
 
   colorMode: {

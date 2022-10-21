@@ -34,7 +34,7 @@
 
     <ValidationObserver ref="form">
       <form class="relative">
-        <div v-if="currentStep === 1">
+        <ValidationObserver v-if="currentStep === 1" :key="1">
           <div class="mb-4">
             <label
               for="gender"
@@ -82,7 +82,7 @@
                 @input="getCities"
                 @selected="onCitySelect"
               />
-              <span v-if="errors" class="mt-1 block text-sm text-red-500">{{
+              <span class="mt-1 block text-sm text-red-500">{{
                 errors[0]
               }}</span>
             </ValidationProvider>
@@ -104,12 +104,12 @@
               >
             </BaseAppDropdown>
           </div>
-        </div>
+        </ValidationObserver>
 
-        <div v-if="currentStep === 2">
+        <ValidationObserver v-if="currentStep === 2" :key="2">
           <div class="mb-4">
             <label
-              for="gender"
+              for="preference"
               class="block mb-2 font-medium text-gray-900 text-sm"
               >Your preference</label
             >
@@ -129,27 +129,30 @@
                   >{{ item }}</BaseAppDropdownItem
                 >
               </BaseAppDropdown>
-              <span v-if="errors" class="mt-1 block text-sm text-red-500">{{
+              <span class="mt-1 block text-sm text-red-500">{{
                 errors[0]
               }}</span>
             </ValidationProvider>
           </div>
 
           <div class="mb-4">
-            <InputValidation
+            <ValidationProvider
               v-slot="{ errors }"
-              v-model="profile.email"
               vid="email"
-              name="E-mail"
               rules="required|email"
-              type="email"
-              label="E-mail"
-              :errors="errors"
-              placeholder="Type in e-mail"
-              @blur="onEmailChanged"
-            />
+              name="E-mail"
+            >
+              <BaseAppInput
+                v-model="profile.email"
+                type="email"
+                label="E-mail"
+                :errors="errors"
+                placeholder="Type in e-mail"
+                @blur="onEmailChanged"
+              />
+            </ValidationProvider>
           </div>
-        </div>
+        </ValidationObserver>
 
         <BaseAppButton
           :disabled="submitting"
@@ -183,12 +186,6 @@ import IconGoogle from '@/assets/svg/google-logo.svg?inline'
 import IconLoader from '@/assets/svg/loader.svg?inline'
 import City from '@/models/City'
 import User from '@/models/User'
-import { withValidation } from 'vee-validate'
-import BaseAppInput from '@/components/base/AppInput'
-import { ValidationProvider } from 'vee-validate'
-import { ValidationObserver } from 'vee-validate'
-
-const InputValidation = withValidation(BaseAppInput)
 
 export default {
   components: {
@@ -196,9 +193,6 @@ export default {
     IconGoogle,
     IconLoader,
     VueAutosuggest,
-    InputValidation,
-    ValidationProvider,
-    ValidationObserver,
   },
 
   data() {
@@ -324,7 +318,7 @@ export default {
               },
             })
           } catch (e) {
-            this.$setErrorsFromResponse(e.response.data)
+            this.$refs.form.setErrors(e.response.data.errors)
           }
           this.submitting = false
         }
@@ -403,8 +397,9 @@ export default {
           this.profile.username = res.data.username
           this.isGeneratingUsername = false
         })
-        .catch((err) => {
-          this.$setErrorsFromResponse(err.response.data)
+        .catch((e) => {
+          this.$refs.form.setErrors(e.response.data.errors)
+          // this.$setErrorsFromResponse(err.response.data)
         })
     },
   },

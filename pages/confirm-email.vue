@@ -40,25 +40,31 @@
       </a>
     </div>
     <div v-show="showChange" class="mb-4">
-      <label
-        for="email"
-        class="block mb-2 font-medium text-gray-900 dark:text-slate-400 text-sm"
-        >Email</label
+      <ValidationProvider
+        v-slot="{ errors }"
+        name="E-mail"
+        vid="email"
+        rules="required|email"
       >
-      <input
-        v-model="newEmail"
-        v-validate="'required|email'"
-        :class="
-          errors.has('email')
-            ? 'border-red-600 focus:ring-red-400 focus:border-red-400'
-            : 'border-gray-300'
-        "
-        type="email"
-        name="email"
-        class="bg-slate-100 focus:bg-white border border-slate-100 mt-1 text-gray-900 text-sm rounded focus:ring-yellow-400 focus:border-yellow-400 block w-full p-3 outline-none"
-        placeholder="newemail@email.com"
-      />
-      <span class="text-sm text-red-600">{{ errors.first('email') }}</span>
+        <label
+          for="email"
+          class="block mb-2 font-medium text-gray-900 dark:text-slate-400 text-sm"
+          >Email</label
+        >
+        <input
+          v-model="newEmail"
+          :class="
+            errors[0]
+              ? 'border-red-600 focus:ring-red-400 focus:border-red-400'
+              : 'border-gray-300'
+          "
+          type="email"
+          name="email"
+          class="bg-slate-100 focus:bg-white border border-slate-100 mt-1 text-gray-900 text-sm rounded focus:ring-yellow-400 focus:border-yellow-400 block w-full p-3 outline-none"
+          placeholder="newemail@email.com"
+        />
+        <span class="text-sm text-red-600">{{ errors[0] }}</span>
+      </ValidationProvider>
     </div>
     <div>
       <BaseAppButton
@@ -105,15 +111,15 @@ import GmailIcon from '@/assets/svg/gmail.svg?inline'
 import YahooIcon from '@/assets/svg/yahoo.svg?inline'
 import OutlookIcon from '@/assets/svg/outlook.svg?inline'
 import config from '../utils/config'
+import { ValidationProvider } from 'vee-validate'
 
 export default {
   components: {
     GmailIcon,
     YahooIcon,
     OutlookIcon,
+    ValidationProvider,
   },
-
-  middleware: 'guest',
 
   data() {
     return {
@@ -187,12 +193,7 @@ export default {
         email: this.email,
       })
 
-      this.$buefy.snackbar.open({
-        message: 'Confirmation email resent.',
-        type: 'is-success',
-        position: 'is-top',
-        actionText: 'Okay',
-      })
+      this.$toast.success('Confirmation email resent.')
 
       this.submitting = false
     },
