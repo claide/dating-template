@@ -30,6 +30,7 @@ export default {
     '@plugins/axios',
     '@plugins/validator',
     '@plugins/i18n',
+    '@plugins/vue-cool-lightbox'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

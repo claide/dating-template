@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white dark:bg-gray-900 guest">
+  <div class="auth bg-[#F1F4F8] dark:bg-gray-900">
     <!-- Show if offline -->
     <div v-if="$nuxt.isOffline" class="text-center bg-red-600 text-white">
       Oops! Looks like you're offline.
