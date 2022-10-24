@@ -146,7 +146,7 @@
                 v-model="profile.email"
                 type="email"
                 label="E-mail"
-                :errors="errors"
+                :errors="errors || $t(errors)"
                 placeholder="Type in e-mail"
                 @blur="onEmailChanged"
               />
@@ -318,7 +318,8 @@ export default {
               },
             })
           } catch (e) {
-            this.$refs.form.setErrors(e.response.data.errors)
+            this.$setErrorsFromResponse(e.response.data)
+            // this.$refs.form.setErrors(e.response.data.errors)
           }
           this.submitting = false
         }
@@ -398,8 +399,8 @@ export default {
           this.isGeneratingUsername = false
         })
         .catch((e) => {
-          this.$refs.form.setErrors(e.response.data.errors)
-          // this.$setErrorsFromResponse(err.response.data)
+          this.$setErrorsFromResponse(e.response.data)
+          // this.$refs.form.setErrors(e.response.data.errors)
         })
     },
   },
