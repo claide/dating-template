@@ -22,7 +22,7 @@
         @keyup="$emit('keyup', $event)"
       />
       <span v-if="errors" class="mt-1 block text-sm text-red-500">{{
-        errors[0]
+        $t(errors[0], { attribute: label })
       }}</span>
     </div>
   </div>

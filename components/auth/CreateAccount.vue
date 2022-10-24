@@ -318,8 +318,8 @@ export default {
               },
             })
           } catch (e) {
-            this.$setErrorsFromResponse(e.response.data)
-            // this.$refs.form.setErrors(e.response.data.errors)
+            // this.$setErrorsFromResponse(e.response.data)
+            this.$refs.form.setErrors(e.response.data.errors)
           }
           this.submitting = false
         }
@@ -399,8 +399,8 @@ export default {
           this.isGeneratingUsername = false
         })
         .catch((e) => {
-          this.$setErrorsFromResponse(e.response.data)
-          // this.$refs.form.setErrors(e.response.data.errors)
+          // this.$setErrorsFromResponse(e.response.data)
+          this.$refs.form.setErrors(e.response.data.errors)
         })
     },
   },
