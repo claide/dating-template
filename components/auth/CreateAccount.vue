@@ -269,7 +269,7 @@ export default {
     },
 
     googleLink() {
-      let url = `https://api.wannahookup.com/api/login/google?s1=${this.$store.state.campaign.s1}`
+      let url = `https://api.shagtoday.co.uk/api/login/google?s1=${this.$store.state.campaign.s1}`
       url += `&s2=${this.$store.state.campaign.s2}`
       url += `&s3=${this.$store.state.campaign.s3}`
       url += `&s4=${this.$store.state.campaign.s4}`
