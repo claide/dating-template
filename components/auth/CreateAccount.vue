@@ -108,6 +108,24 @@
 
         <ValidationObserver v-if="currentStep === 2" :key="2">
           <div class="mb-4">
+            <ValidationProvider
+              v-slot="{ errors }"
+              vid="email"
+              rules="required|email"
+              name="E-mail"
+            >
+              <BaseAppInput
+                v-model="profile.email"
+                type="email"
+                label="E-mail"
+                :errors="errors || $t(errors)"
+                placeholder="Type in e-mail"
+                @blur="onEmailChanged"
+              />
+            </ValidationProvider>
+          </div>
+
+          <div class="mb-4">
             <label
               for="preference"
               class="block mb-2 font-medium text-gray-900 text-sm"
@@ -132,24 +150,6 @@
               <span class="mt-1 block text-sm text-red-500">{{
                 errors[0]
               }}</span>
-            </ValidationProvider>
-          </div>
-
-          <div class="mb-4">
-            <ValidationProvider
-              v-slot="{ errors }"
-              vid="email"
-              rules="required|email"
-              name="E-mail"
-            >
-              <BaseAppInput
-                v-model="profile.email"
-                type="email"
-                label="E-mail"
-                :errors="errors || $t(errors)"
-                placeholder="Type in e-mail"
-                @blur="onEmailChanged"
-              />
             </ValidationProvider>
           </div>
         </ValidationObserver>
@@ -318,7 +318,6 @@ export default {
               },
             })
           } catch (e) {
-            // this.$setErrorsFromResponse(e.response.data)
             this.$refs.form.setErrors(e.response.data.errors)
           }
           this.submitting = false
@@ -399,7 +398,6 @@ export default {
           this.isGeneratingUsername = false
         })
         .catch((e) => {
-          // this.$setErrorsFromResponse(e.response.data)
           this.$refs.form.setErrors(e.response.data.errors)
         })
     },

@@ -11,8 +11,8 @@
 
 <script>
 export default {
-  layout: 'guest',
   middleware: 'guest',
+
   head() {
     return {
       title: 'Login',
