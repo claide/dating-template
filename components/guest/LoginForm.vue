@@ -24,7 +24,7 @@
           <ValidationProvider
             v-slot="{ errors }"
             vid="password"
-            name="password"
+            name="Password"
             rules="required"
           >
             <BaseAppInput
@@ -127,23 +127,28 @@ export default {
 
   methods: {
     async onSubmit() {
-      if (!this.$refs.form.validate()) {
+      if (!(await this.$refs.form.validate())) {
         return false
       }
-      this.submitting = true
+
       try {
+        this.submitting = true
         await this.$auth.login({
           data: {
             email: this.form.email,
             password: this.form.password,
           },
         })
-      } catch (e) {
-        this.$refs.form.setErrors(e.response.data.errors)
-
-        if (e.response.status === 480) {
+      } catch (err) {
+        if (err.response.status === 401) {
           this.$refs.form.setErrors({
-            email: ['Please verify your email'],
+            email: 'Invalid email/password combination.',
+          })
+        }
+
+        if (err.response.status === 480) {
+          this.$refs.form.setErrors({
+            email: 'Please verify your email.',
           })
         }
       }

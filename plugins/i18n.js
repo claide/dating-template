@@ -7,7 +7,9 @@ Vue.use(VueI18n)
 export default ({ app }) => {
   app.i18n = new VueI18n({
     locale: 'en',
-    silentFallbackWarn: true,
-    messages,
+    silentTranslationWarn: true,
+    messages: {
+      en: messages,
+    },
   })
 }
