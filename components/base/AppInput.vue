@@ -50,7 +50,7 @@ export default {
       default: 'Field',
     },
     errors: {
-      type: Array,
+      type: [Array, Object],
       default: () => [],
     },
     withIcon: {
