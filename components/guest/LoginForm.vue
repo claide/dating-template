@@ -141,12 +141,11 @@ export default {
       } catch (e) {
         this.$refs.form.setErrors(e.response.data.errors)
 
-        // if (e.response.status === 480) {
-        //   this.$validator.errors.add({
-        //     field: 'email',
-        //     msg: 'Please verify your email.',
-        //   })
-        // }
+        if (e.response.status === 480) {
+          this.$refs.form.setErrors({
+            email: ['Please verify your email'],
+          })
+        }
       }
       this.submitting = false
     },
