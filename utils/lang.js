@@ -208,5 +208,7 @@ export default {
     privacy: 'Privacy Policy',
     faq: 'FAQ',
     report_abuse: 'Report Abuse',
+    helpdesk: 'Helpdesk',
+    submit_request: 'Submit a Request',
   },
 }

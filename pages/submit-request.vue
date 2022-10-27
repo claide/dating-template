@@ -3,7 +3,7 @@
     <h3
       class="text-xl font-medium text-gray-900 dark:text-[#A6ADBA] lg:text-2xl mb-8 text-center"
     >
-      Helpdesk
+      Submit a Request
     </h3>
     <p class="text-gray-600 dark:text-gray-400 font-normal text-center mb-6">
       We kindly suggest that you first check our
@@ -16,46 +16,62 @@
     <ValidationObserver ref="form">
       <ValidationProvider
         v-slot="{ errors }"
-        name="Category"
-        vid="category"
+        name="Request"
+        vid="request"
         rules="required"
         tag="div"
         class="mb-4"
       >
         <label
-          for="category"
+          for="request"
           class="block mb-2 font-medium text-gray-900 dark:text-slate-400 text-sm"
-          >Category</label
+          >Request type</label
         >
-        <BaseAppDropdown v-model="form.category">
+        <BaseAppDropdown v-model="form.request_type">
           <template #trigger>
-            <span class="capitalize">{{ categoryTriggerText }}</span>
+            <span class="capitalize">{{ requestTriggerText }}</span>
           </template>
           <BaseAppDropdownItem
-            v-for="(category, i) in categories"
+            v-for="(request, i) in requests"
             :key="i"
-            :value="category.value"
-            >{{ category.label }}</BaseAppDropdownItem
+            :value="request.value"
+            >{{ request.label }}</BaseAppDropdownItem
           >
         </BaseAppDropdown>
         <span class="mt-1 block text-sm text-red-500">{{ errors[0] }}</span>
       </ValidationProvider>
 
       <ValidationProvider
+        v-if="form.request_type === 'others'"
         v-slot="{ errors }"
-        name="Question"
-        vid="question"
+        name="Title"
         rules="required"
         tag="div"
         class="mb-4"
       >
+        <BaseAppInput
+          v-model="form.custom_request_type"
+          label="Title"
+          :errors="errors"
+          placeholder="Type in title"
+        />
+      </ValidationProvider>
+
+      <ValidationProvider
+        v-slot="{ errors }"
+        name="Message"
+        vid="message"
+        rules="required|max:255|min:8"
+        tag="div"
+        class="mb-4"
+      >
         <label
-          for="question"
+          for="message"
           class="block mb-2 font-medium text-gray-900 dark:text-slate-400 text-sm"
-          >Describe your question</label
+          >Describe your request</label
         >
         <textarea
-          v-model="form.question"
+          v-model="form.message"
           rows="4"
           class="block p-2.5 w-full text-sm text-gray-900 bg-slate-100 rounded-lg border border-gray-300 focus:ring-yellow-500 focus:border-yellow-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500 focus:outline-none"
           placeholder="Your question..."
@@ -75,7 +91,7 @@
 </template>
 
 <script>
-import Helpdesk from '@/models/Helpdesk'
+import UserRequest from '@/models/UserRequest'
 import IconLoader from '@/assets/svg/loader.svg?inline'
 
 export default {
@@ -89,15 +105,20 @@ export default {
 
   data() {
     return {
-      categories: [
+      requests: [
         {
-          value: 'payments',
-          label: 'Payments',
+          value: 'Add new feature',
+          label: 'Add new feature',
+        },
+        {
+          value: 'others',
+          label: 'Others',
         },
       ],
       form: {
-        category: null,
-        question: '',
+        request_type: null,
+        message: '',
+        custom_request_type: '',
       },
       submitting: false,
     }
@@ -105,34 +126,36 @@ export default {
 
   head() {
     return {
-      title: this.$t('pages.helpdesk'),
+      title: this.$t('pages.submit_request'),
     }
   },
 
   computed: {
-    categoryTriggerText() {
-      if (this.form.category === null) {
-        return 'Select category'
+    requestTriggerText() {
+      if (this.form.request_type === null) {
+        return 'Select request'
       }
 
-      return this.form.category
+      return this.form.request_type
     },
   },
 
   methods: {
     onSubmit() {
-      this.submitting = true
       this.$refs.form.validate().then((success) => {
         if (success) {
           this.submitting = true
-          const helpdesk = new Helpdesk(this.form)
-          helpdesk
+
+          const userRequest = new UserRequest(this.form)
+          userRequest
             .save()
             .then(() => {
+              this.form
               // reset form values
               this.form = {
-                category: null,
-                question: '',
+                request_type: null,
+                message: '',
+                custom_request_type: '',
               }
 
               // reset form errors
@@ -140,12 +163,12 @@ export default {
                 this.$refs.form.reset()
               })
 
-              this.$toast.success('Your question has been submitted.', {
+              this.$toast.success('Your request has been submitted.', {
                 duration: 3000,
               })
             })
-            .catch((e) => {
-              console.log(e.response)
+            .catch((err) => {
+              console.log('error : ' + err)
             })
             .then(() => (this.submitting = false))
         }
