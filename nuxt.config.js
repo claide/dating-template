@@ -30,7 +30,7 @@ export default {
     '@plugins/axios',
     '@plugins/validator',
     '@plugins/i18n',
-    '@plugins/vue-cool-lightbox'
+    '@plugins/vue-cool-lightbox',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -46,7 +46,7 @@ export default {
   ],
 
   colorMode: {
-    preference: 'system', // default value of $colorMode.preference
+    preference: 'light', // default value of $colorMode.preference
     fallback: 'light', // fallback value if not system preference found
     classSuffix: '',
     storageKey: 'app-color-mode',
@@ -80,7 +80,6 @@ export default {
         },
         redirect: {
           login: '/login',
-          logout: '/',
           home: '/dashboard',
         },
       },

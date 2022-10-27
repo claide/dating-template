@@ -14,23 +14,23 @@
       class="h-6 w-6 fill-current ml-2 md:ml-6 hover:cursor-pointer"
       @click="getTheme"
     />
-    <IconSystem
+    <!-- <IconSystem
       v-else
       :class="iconClass"
       class="h-6 w-6 fill-current ml-2 md:ml-6 hover:cursor-pointer"
       @click="getTheme"
-    />
+    /> -->
   </div>
 </template>
 
 <script>
-import IconSystem from '@/assets/svg/system.svg?inline'
+// import IconSystem from '@/assets/svg/system.svg?inline'
 import IconLight from '@/assets/svg/light.svg?inline'
 import IconDark from '@/assets/svg/dark.svg?inline'
 
 export default {
   components: {
-    IconSystem,
+    // IconSystem,
     IconLight,
     IconDark,
   },
@@ -44,12 +44,12 @@ export default {
 
   data() {
     return {
-      colors: ['system', 'light', 'dark'],
+      colors: ['light', 'dark'],
     }
   },
 
   methods: {
-    getTheme(color) {
+    getTheme() {
       const index = this.colors.indexOf(this.$colorMode.preference)
 
       if (index === -1) {

@@ -5,7 +5,6 @@
         <div class="mb-6">
           <ValidationProvider
             v-slot="{ errors }"
-            vid="email"
             name="E-mail"
             rules="required|email"
           >
@@ -23,7 +22,6 @@
         <div class="mb-6">
           <ValidationProvider
             v-slot="{ errors }"
-            vid="password"
             name="Password"
             rules="required"
           >
@@ -133,7 +131,7 @@ export default {
 
       try {
         this.submitting = true
-        await this.$auth.login({
+        this.$auth.login({
           data: {
             email: this.form.email,
             password: this.form.password,
@@ -141,14 +139,15 @@ export default {
         })
       } catch (err) {
         if (err.response.status === 401) {
+          console.log('error 401')
           this.$refs.form.setErrors({
-            email: 'Invalid email/password combination.',
+            email: ['Invalid email/password combination.'],
           })
         }
 
         if (err.response.status === 480) {
           this.$refs.form.setErrors({
-            email: 'Please verify your email.',
+            email: ['Please verify your email.'],
           })
         }
       }

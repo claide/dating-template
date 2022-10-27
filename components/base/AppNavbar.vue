@@ -20,12 +20,6 @@
             <nuxt-link to="/login" class="text-white hover:text-primary mr-3">
               Login
             </nuxt-link>
-            <nuxt-link
-              to="/register"
-              class="block py-2 px-4 bg-gradient-to-r from-primary to-secondary hover:bg-yellow-500 text-black rounded font-medium"
-            >
-              Create account
-            </nuxt-link>
           </li>
           <li class="flex items-center">
             <BaseAppThemeSwitch />
