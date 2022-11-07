@@ -1,7 +1,7 @@
 <template>
   <div>
     <ValidationObserver ref="form">
-      <form>
+      <form @submit.prevent="onSubmit()">
         <div class="mb-6">
           <ValidationProvider
             v-slot="{ errors }"
@@ -34,11 +34,7 @@
             />
           </ValidationProvider>
         </div>
-        <BaseAppButton
-          variant="primary"
-          expanded
-          :is-loading="submitting"
-          @click.prevent="onSubmit"
+        <BaseAppButton variant="primary" expanded :is-loading="submitting"
           >Continue</BaseAppButton
         >
       </form>

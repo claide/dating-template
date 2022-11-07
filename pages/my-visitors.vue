@@ -1,6 +1,6 @@
 <template>
   <!-- Begin content -->
-  <div class="d-content">
+  <div>
     <section class="section">
       <div class="">
         <div
@@ -11,7 +11,7 @@
         </div>
 
         <div
-          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-4 lg:gap-6 text-dark dark:text-[#A6ADBA] container max-w-7xl px-4 sm:px-6 py-2 md:py-4 mx-auto"
+          class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-4 lg:gap-6 text-dark dark:text-[#A6ADBA] px-4 sm:px-6 py-2 md:py-4"
         >
           <template v-for="visit in visitors">
             <div

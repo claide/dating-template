@@ -1,5 +1,5 @@
 <template>
-  <div class="container max-w-7xl px-4 sm:px-6 py-2 mx-auto">
+  <div class="px-4 sm:px-6 py-2">
     <div class="w-full flex flex-col lg:flex-row">
       <div class="basis-2/5 lg:mr-4 flex flex-col lg:block mb-4">
         <div class="order-last lg:order-1 dark:text-slate-300">
