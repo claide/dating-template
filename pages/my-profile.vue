@@ -251,6 +251,11 @@ export default {
       title: this.$t('pages.my_profile'),
     }
   },
+  data() {
+    return {
+      index: null,
+    }
+  },
 
   computed: {
     gallery() {
@@ -280,8 +285,8 @@ export default {
   },
 
   methods: {
-    openThumbnail(index = 0) {
-      this.$refs.lightbox.showImage(index)
+    openThumbnail(index) {
+      this.index = index
     },
     convertToFeet(cm) {
       const realFeet = (cm * 0.3937) / 12
