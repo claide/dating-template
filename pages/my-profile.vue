@@ -66,6 +66,7 @@
           :gender="profile.gender"
           class="mt-8 w-52 order-1 lg:order-last mx-auto lg:mx-0 mb-4"
           type="display"
+          @click.native="index = profile.photos.length"
         />
       </div>
       <div class="w-full">
