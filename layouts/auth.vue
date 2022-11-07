@@ -7,7 +7,7 @@
     <AuthNavbar />
     <div>
       <AuthHeader />
-      <Nuxt class="min-h-[calc(100vh-200px)] pt-12" />
+      <Nuxt class="min-h-[calc(100vh-200px)] mb-3 lg:pt-12" />
     </div>
     <BaseAppFooter />
   </div>

@@ -1,8 +1,8 @@
 <template>
   <div class="container max-w-7xl px-4 sm:px-6 py-2 mx-auto">
     <div class="w-full flex flex-col lg:flex-row">
-      <div class="basis-2/5 flex flex-col lg:block mb-4">
-        <div class="order-last lg:order-1 dark:text-slate-200">
+      <div class="basis-2/5 lg:mr-4 flex flex-col lg:block mb-4">
+        <div class="order-last lg:order-1 dark:text-slate-300">
           <div class="flex items-center justify-center lg:justify-start mb-4">
             <span class="text-2xl font-medium">{{ profile.username }}</span>
             <span
@@ -50,11 +50,14 @@
             {{ profile.country.name }}
           </div>
           <div class="text-center lg:text-left">
-            <nuxt-link
-              to="/profile/edit"
-              class="py-2 px-4 bg-gradient-to-r from-primary to-secondary hover:bg-yellow-500 text-black rounded block lg:inline font-medium text-sm"
-              >Edit Profile</nuxt-link
-            >
+            <BaseAppButton tag="a">
+              Edit Profile
+              <!-- <nuxt-link
+                to="/profile/edit"
+                class="py-2 px-4 bg-gradient-to-r from-primary to-secondary hover:bg-yellow-500 text-black rounded block lg:inline w-3/5 font-medium text-sm mx-auto"
+                >Edit Profile</nuxt-link
+              > -->
+            </BaseAppButton>
           </div>
         </div>
 
@@ -62,7 +65,7 @@
           :src="profile.primary_photo ? profile.primary_photo.url : null"
           :gender="profile.gender"
           class="mt-8 w-52 order-1 lg:order-last mx-auto lg:mx-0 mb-4"
-          type="thumbnail"
+          type="display"
         />
       </div>
       <div class="w-full">
@@ -82,41 +85,41 @@
           </h1>
           <ul class="list-none py-3">
             <li
-              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 text-sm lg:text-base"
+              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 items-center"
             >
-              <div>Username</div>
-              <div class="font-medium">{{ profile.username }}</div>
+              <div class="font-medium">Username</div>
+              <div class="text-slate-500">{{ profile.username }}</div>
             </li>
             <li
-              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 text-sm lg:text-base"
+              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 items-center"
             >
-              <div>Gender</div>
-              <div class="font-medium capitalize">{{ profile.gender }}</div>
+              <div class="font-medium">Gender</div>
+              <div class="text-slate-500 capitalize">{{ profile.gender }}</div>
             </li>
             <li
-              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 text-sm lg:text-base"
+              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 items-center"
             >
-              <div>Age</div>
-              <div class="font-medium">{{ profile.age }}</div>
+              <div class="font-medium">Age</div>
+              <div class="text-slate-500">{{ profile.age }}</div>
             </li>
             <li
-              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 text-sm lg:text-base"
+              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 items-center"
             >
-              <div>City</div>
-              <div class="font-medium">{{ profile.lives_in }}</div>
+              <div class="font-medium">City</div>
+              <div class="text-slate-500">{{ profile.lives_in }}</div>
             </li>
             <li
               v-if="profile.country"
-              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 text-sm lg:text-base"
+              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 items-center"
             >
-              <div>Country</div>
-              <div class="font-medium">{{ profile.country.name }}</div>
+              <div class="font-medium">Country</div>
+              <div class="text-slate-500">{{ profile.country.name }}</div>
             </li>
             <li
-              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 text-sm lg:text-base"
+              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 items-center"
             >
-              <div>Looking for</div>
-              <div class="font-medium capitalize">
+              <div class="font-medium">Looking for</div>
+              <div class="text-slate-500 capitalize">
                 {{ profile.looking_for }}
               </div>
             </li>
@@ -134,61 +137,61 @@
           </h1>
           <ul class="list-none py-3">
             <li
-              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 text-sm lg:text-base"
+              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3"
             >
-              <div>Body type</div>
-              <div v-if="profile.body_type_string" class="font-medium">
+              <div class="font-medium">Body type</div>
+              <div v-if="profile.body_type_string" class="text-slate-500">
                 {{ profile.body_type_string | preferences }}
               </div>
-              <div v-else class="font-medium">—</div>
+              <div v-else class="text-slate-500">—</div>
             </li>
             <li
-              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 text-sm lg:text-base"
+              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3"
             >
-              <div>Length</div>
-              <div v-if="profile.length" class="font-medium">
+              <div class="font-medium">Length</div>
+              <div v-if="profile.length" class="text-slate-500">
                 {{ profile.length }} cm
               </div>
-              <div v-else class="font-medium">—</div>
+              <div v-else class="text-slate-500">—</div>
             </li>
             <li
-              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 text-sm lg:text-base"
+              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3"
             >
-              <div>Eye color</div>
+              <div class="font-medium">Eye color</div>
               <div
                 v-if="profile.eye_color_string"
-                class="font-medium capitalize"
+                class="text-slate-500 capitalize"
               >
                 {{ profile.eye_color_string | preferences }}
               </div>
-              <div v-else class="font-medium">—</div>
+              <div v-else class="text-slate-500">—</div>
             </li>
             <li
-              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 text-sm lg:text-base"
+              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3"
             >
-              <div>Hair color</div>
-              <div v-if="profile.hair_color_string" class="font-medium">
+              <div class="font-medium">Hair color</div>
+              <div v-if="profile.hair_color_string" class="text-slate-500">
                 {{ profile.hair_color_string | preferences }}
               </div>
-              <div v-else class="font-medium">—</div>
+              <div v-else class="text-slate-500">—</div>
             </li>
             <li
-              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 text-sm lg:text-base"
+              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3"
             >
-              <div>Tattoos</div>
-              <div v-if="profile.tattoos_string" class="font-medium">
+              <div class="font-medium">Tattoos</div>
+              <div v-if="profile.tattoos_string" class="text-slate-500">
                 {{ profile.tattoos_string | preferences }}
               </div>
-              <div v-else class="font-medium">—</div>
+              <div v-else class="text-slate-500">—</div>
             </li>
             <li
-              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3 text-sm lg:text-base"
+              class="grid lg:grid-cols-[166px,_1fr] gap-2 lg:gap-3 dark:text-slate-400 pb-3"
             >
-              <div>Piercings</div>
-              <div v-if="profile.piercings_string" class="font-medium">
+              <div class="font-medium">Piercings</div>
+              <div v-if="profile.piercings_string" class="text-slate-500">
                 {{ profile.piercings_string | preferences }}
               </div>
-              <div v-else class="font-medium">—</div>
+              <div v-else class="text-slate-500">—</div>
             </li>
           </ul>
           <h1 class="text-2xl py-4 text-black dark:text-slate-300">
@@ -202,22 +205,13 @@
               >Change</nuxt-link
             >
           </h1>
-          <div class="flex flex-wrap images-wrapper">
-            <!-- <div class="images-wrapper">
-              <div
-                class="image w-[300px] h-[300px] mx-auto"
-                v-for="(image, imageIndex) in profile.photos"
-                :key="imageIndex"
-                @click="index = imageIndex"
-                :style="{ backgroundImage: `url(${image.url})` }"
-              ></div>
-            </div> -->
+          <div class="flex flex-wrap">
             <div
-              v-for="(photo, imageIndex) in profile.photos"
+              v-for="(photo, index) in profile.photos"
               :key="photo.id"
-              class="image basis-1/2 lg:basis-1/4 p-3"
+              class="basis-1/2 lg:basis-1/4 p-3"
             >
-              <a @click.prevent="index = imageIndex" href="#">
+              <a href="#" @click.prevent="openThumbnail(index)">
                 <img
                   :src="photo.url"
                   alt=""
@@ -230,12 +224,6 @@
       </div>
     </div>
 
-    <!-- <LightBox
-      ref="lightbox"
-      :images="gallery"
-      :show-light-box="false"
-      :show-thumbs="false"
-    ></LightBox> -->
     <CoolLightBox
       :items="gallery"
       :index="index"
@@ -249,18 +237,21 @@
 <script>
 export default {
   name: 'MyProfile',
+
   layout: 'auth',
+
   middleware: 'auth',
-  data() {
-    return {
-      index: null,
-    }
+
+  asyncData({ store }) {
+    return { profile: store.state.authentication.user.data }
   },
+
   head() {
     return {
-      title: 'My profile',
+      title: this.$t('pages.my_profile'),
     }
   },
+
   computed: {
     gallery() {
       if (
@@ -287,16 +278,21 @@ export default {
       return photos
     },
   },
-  asyncData({ store }) {
-    return { profile: store.state.authentication.user.data }
-  },
+
   methods: {
     openThumbnail(index = 0) {
       this.$refs.lightbox.showImage(index)
     },
+    convertToFeet(cm) {
+      const realFeet = (cm * 0.3937) / 12
+      const feet = Math.floor(realFeet)
+      const inches = Math.round((realFeet - feet) * 12)
+      return feet + "'" + inches + '"'
+    },
   },
 }
 </script>
+
 <style lang="scss">
 .cool-lightbox__slide__img {
   @media (min-width: 767px) {

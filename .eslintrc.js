@@ -22,6 +22,9 @@ module.exports = {
     'no-empty': 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-sequences': 'off',
+    'no-unused-expressions': 'off',
+    'vue/require-prop-types': 'off',
   },
   globals: {
     $nuxt: true,

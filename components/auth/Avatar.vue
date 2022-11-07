@@ -1,12 +1,12 @@
 <template>
-  <div @click="push" class="cursor-pointer flex items-end">
+  <div class="cursor-pointer flex items-end" @click="push">
     <img
       v-if="srcLink"
       :src="srcLink"
-      @error="onImageError"
       :type="type"
       :class="imgType"
       class="w-full h-full object-cover"
+      @error="onImageError"
     />
     <img
       v-if="!srcLink && gender === 'male'"
@@ -57,6 +57,8 @@ export default {
       return {
         'rounded-full ring-2 ring-primary p-1': this.type === 'avatar',
         'rounded-t h-[170px] md:min-h-[284px]': this.type === 'thumbnail',
+        'rounded h-[234px] md:h-[170px] md:min-h-[284px]':
+          this.type === 'display',
         rounded: this.type === 'gallery',
       }
     },

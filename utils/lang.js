@@ -210,5 +210,6 @@ export default {
     report_abuse: 'Report Abuse',
     helpdesk: 'Helpdesk',
     submit_request: 'Submit a Request',
+    my_profile: 'My Profile',
   },
 }

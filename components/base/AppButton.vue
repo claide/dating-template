@@ -2,7 +2,7 @@
   <component
     :is="tag"
     :expanded="expanded"
-    class="leading-relaxed font-medium items-center justify-center border shadow focus:outline-none rounded-md"
+    class="leading-relaxed font-medium items-center justify-center border shadow focus:outline-none rounded inline-flex"
     :class="[
       btnClass,
       {
@@ -63,11 +63,11 @@ export default {
         'cursor-not-allowed inline-flex': this.isLoading,
         'cursor-pointer flex': !this.isLoading,
         //button variant
-        'bg-primary text-black hover:bg-yellow-500 font-medium rounded-lg text-md p-3.5 border-primary':
+        'bg-primary text-black hover:bg-yellow-500 font-medium rounded text-md p-3.5 border-primary':
           this.variant === 'primary',
-        'bg-red-700 text-white hover:bg-red-800 font-medium rounded-lg text-md p-3.5 border-red-700':
+        'bg-red-700 text-white hover:bg-red-800 font-medium rounded text-md p-3.5 border-red-700':
           this.variant === 'danger',
-        'bg-blue-700 text-white hover:bg-blue-800 font-medium rounded-lg text-md p-3.5 border-blue-700':
+        'bg-blue-700 text-white hover:bg-blue-800 font-medium rounded text-md p-3.5 border-blue-700':
           this.variant === 'info',
       }
     },
