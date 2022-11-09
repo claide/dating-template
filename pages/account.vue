@@ -30,9 +30,9 @@
         </button>
       </nav>
       <div class="bg-white dark:bg-clay w-full p-8">
-        <AccountSettingsForm v-if="tabs[0].current" />
-        <AccountNotificationForm v-if="tabs[1].current" />
-        <AccountPayments v-if="tabs[2].current" />
+        <AuthAccountSettingsForm v-if="tabs[0].current" />
+        <AuthAccountNotificationForm v-if="tabs[1].current" />
+        <AuthAccountPayments v-if="tabs[2].current" />
       </div>
     </div>
   </div>
