@@ -25,6 +25,7 @@ module.exports = {
     'no-sequences': 'off',
     'no-unused-expressions': 'off',
     'vue/require-prop-types': 'off',
+    'no-unused-vars': 'off',
   },
   globals: {
     $nuxt: true,

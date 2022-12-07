@@ -1,5 +1,5 @@
 <template>
-  <div class="cursor-pointer flex items-end" @click="push">
+  <div class="cursor-pointer flex items-end h-full" @click="push">
     <img
       v-if="srcLink"
       :src="srcLink"

@@ -13,14 +13,14 @@ const config = {
   auth: {
     headers: {
       Authorization: '',
-      Accept: 'application/json'
-    }
-  }
+      Accept: 'application/json',
+    },
+  },
 }
 
 let echoInstance = null
 
-export default function(auth) {
+export default function (auth) {
   config.auth.headers.Authorization = auth.$storage._state['_token.local']
   if (echoInstance) {
     return echoInstance

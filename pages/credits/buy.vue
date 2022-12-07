@@ -1,5 +1,5 @@
 <template>
-  <div class="px-8">
+  <div>
     <div class="px-4 sm:px-6 lg:px-8">
       <div class="text-center">
         <h2
@@ -31,18 +31,18 @@ export default {
   // components: { TestBuy },
   layout: 'auth',
   middleware: 'auth',
-
-  head() {
-    return {
-      title: 'Buy credits',
-    }
-  },
   data() {
     return {
       loadingBuy: false,
       creditsPlans: [],
       featuredPlan: null,
       isValentinePromotion: true,
+    }
+  },
+
+  head() {
+    return {
+      title: 'Buy credits',
     }
   },
   computed: {

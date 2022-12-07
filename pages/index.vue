@@ -64,9 +64,9 @@ export default {
 <style lang="scss">
 .section {
   &-tagline {
-    margin-top: 43rem;
+    margin-top: 37rem;
     @media (min-width: 374px) {
-      margin-top: 39rem;
+      margin-top: 33rem;
     }
     @media (min-width: 413px) {
       margin-top: 37rem;

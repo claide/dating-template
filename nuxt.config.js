@@ -105,6 +105,13 @@ export default {
     baseURL: process.env.API_URL || 'https://dating-api.muzio.dev/api',
   },
 
+  watchers: {
+    // Temporary fix: https://github.com/nuxt-community/tailwindcss-module/issues/359
+    webpack: {
+      ignored: ['**/*.eslintcache', '**/.git/**'],
+    },
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     // add exception
