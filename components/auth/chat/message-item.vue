@@ -1,12 +1,12 @@
 <template>
   <div :class="isMine ? '' : 'flex'" class="p-2 md:p-3">
     <router-link :to="'/profile/' + message.from.uuid">
-      <div v-if="!isMine" class="relative h-8 w-8 md:h-12 md:w-12">
+      <div v-if="!isMine" class="relative">
         <AuthAvatar
           :src="message.from.approved_primary_photo_thumb"
           :gender="message.from.gender"
           type="avatar"
-          class="w-full flex items-center relative"
+          class="flex items-center relative h-8 w-8 md:h-12 md:w-12"
         />
       </div>
     </router-link>

@@ -31,8 +31,12 @@
     "vue": "^2.7.10",
     "vue-api-query": "^1.10.0",
     "vue-autosuggest": "^2.2.0",
+    "vue-clickaway": "^2.2.2",
     "vue-cool-lightbox": "^2.7.5",
+    "vue-cropperjs": "4.2.0",
     "vue-i18n": "8",
+    "vue-image-lightbox": "^7.2.0",
+    "vue-lazyload": "^3.0.0-rc.2",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10"
   },

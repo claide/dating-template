@@ -66,7 +66,8 @@
         <span class="text-sm text-red-600">{{ errors[0] }}</span>
       </ValidationProvider>
     </div>
-    <div>
+
+    <div class="text-center">
       <BaseAppButton
         tag="a"
         :href="`https://${emailLink}`"
@@ -75,7 +76,9 @@
       >
         Go To Inbox
       </BaseAppButton>
+    </div>
 
+    <div>
       <p v-show="!showChange" class="text-center mb-6">
         Your email:
         <a :href="`https://${emailLink}`">

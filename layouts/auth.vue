@@ -8,18 +8,10 @@
     <div>
       <AuthHeader />
       <Nuxt
-        class="container max-w-7xl px-4 mx-auto sm:px-6 py-4 lg:py-8 min-h-[calc(100vh-200px)]"
+        class="container max-w-7xl px-4 mx-auto sm:px-6 py-4 lg:py-8 min-h-[calc(100vh-200px)] relative overflow-auto"
         :class="{ 'py-0 pt-0': $route.name === 'messages-id' }"
       />
     </div>
     <BaseAppFooter />
   </div>
 </template>
-
-<script>
-export default {
-  mounted() {
-    console.log(this.$route.name)
-  },
-}
-</script>

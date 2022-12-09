@@ -50,14 +50,14 @@
             {{ profile.country.name }}
           </div>
           <div class="text-center lg:text-left">
-            <BaseAppButton tag="a">
-              Edit Profile
-              <!-- <nuxt-link
-                to="/profile/edit"
-                class="py-2 px-4 bg-gradient-to-r from-primary to-secondary hover:bg-yellow-500 text-black rounded block lg:inline w-3/5 font-medium text-sm mx-auto"
-                >Edit Profile</nuxt-link
-              > -->
-            </BaseAppButton>
+            <!-- <BaseAppButton tag="a">
+              Edit Profile -->
+            <nuxt-link
+              to="/profile/edit"
+              class="py-2 px-4 bg-gradient-to-r from-primary to-secondary hover:bg-yellow-500 text-black rounded block lg:inline w-3/5 font-medium text-sm mx-auto"
+              >Edit Profile</nuxt-link
+            >
+            <!-- </BaseAppButton> -->
           </div>
         </div>
 
@@ -246,15 +246,15 @@ export default {
   asyncData({ store }) {
     return { profile: store.state.authentication.user.data }
   },
+  data() {
+    return {
+      index: null,
+    }
+  },
 
   head() {
     return {
       title: this.$t('pages.my_profile'),
-    }
-  },
-  data() {
-    return {
-      index: null,
     }
   },
 

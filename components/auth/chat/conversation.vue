@@ -60,7 +60,7 @@
 
     <div
       ref="convo"
-      class="h-[350px] overflow-y-auto bg-slate-100 dark:bg-[#1D2636] p-0 md:p-4 rounded"
+      class="h-[350px] overflow-y-auto bg-slate-100 dark:bg-[#1D2636] p-2 md:p-4 rounded"
       @scroll="showLoadMore()"
     >
       <div class="text-center">
